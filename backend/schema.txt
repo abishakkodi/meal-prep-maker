@@ -1,0 +1,78 @@
+Tables
+
+Recipes
+  Recipe ID (Primary)
+  Name
+  Calories (Total)
+  Description
+  Picture Link
+
+RecipeStaples
+  Recipe Id
+  Staple Id
+
+
+RecipeIngredients
+  Recipe Id
+  Ingredients Id
+
+Staples
+  Staple ID
+  Recipe Id
+  Name
+  Vegetarian
+  Calories
+  Protein
+  Carb
+  Fat
+
+
+Ingredients
+  Ingredient ID
+  Recipe ID
+  Name
+  Vegetarian
+  Calories
+  Protein
+  Carb
+  Fat
+
+EXAMPLE?
+  RECIPE
+  ID   Name                   Cal
+  |1  | Chicken B w/broccoli rice|   |
+  |2  | Broccoli Beef
+  |3  |
+  |4  |
+
+RecipeStaples
+  ID  Recipe ID    Ingredient ID
+  |1 | 1          |1
+  |2 | 1          |2
+  |3 | 1          |3
+  |4 | 2          |2
+  |5 | 2          |4
+
+Ingredient
+   ID  Name
+  |1 | Chicken      |
+  |2 | Broccoli     |
+  |3 | Rice         |
+  |4 | Beef         |
+
+
+Users
+  UserID
+  Name
+  Password
+
+
+User Favorite Recipes
+  UserID
+  RecipeID
+
+
+
+
+
+
