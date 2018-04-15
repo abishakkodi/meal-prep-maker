@@ -6,9 +6,10 @@ const sequelize = new Sequelize('testMealPrep', 'root', '', {
 });
 
 const Recipes = sequelize.define('recipes', {
-  name: Sequelize.STRING ,
+  name: Sequelize.STRING,
   calories: Sequelize.INTEGER ,
-  description: Sequelize.STRING ,
+  description: Sequelize.TEXT,
+  steps: Sequelize.TEXT,
   vegetarian: Sequelize.BOOLEAN,
   pictureLink: Sequelize.STRING
 });
@@ -24,21 +25,22 @@ const RecipeIngredients = sequelize.define('recipeIngredients', {
 });
 
 const Staples = sequelize.define('staples', {
-  Name: Sequelize.STRING ,
-  Vegetarian: Sequelize.BOOLEAN ,
-  Calories: Sequelize.INTEGER ,
-  Protein: Sequelize.INTEGER ,
-  Carb: Sequelize.INTEGER ,
-  Fat: Sequelize.INTEGER
+  name: Sequelize.STRING ,
+  vegetarian: Sequelize.BOOLEAN ,
+  calories: Sequelize.INTEGER ,
+  protein: Sequelize.INTEGER ,
+  carb: Sequelize.INTEGER ,
+  fat: Sequelize.INTEGER
 });
 
 const Ingredients = sequelize.define('ingredients', {
-  Name: Sequelize.STRING ,
-  Vegetarian: Sequelize.BOOLEAN ,
-  Calories: Sequelize.INTEGER ,
-  Protein: Sequelize.INTEGER ,
-  Carb: Sequelize.INTEGER ,
-  Fat: Sequelize.INTEGER
+  name: Sequelize.STRING ,
+  vegetarian: Sequelize.BOOLEAN ,
+  staple: Sequelize.BOOLEAN,
+  calories: Sequelize.INTEGER ,
+  protein: Sequelize.INTEGER ,
+  carb: Sequelize.INTEGER ,
+  fat: Sequelize.INTEGER
 });
 
 

@@ -1,21 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const x = require('./mealPlanner');
 const sequelize = require('./mysqlDB.js').db;
 const createIngredient = require('./helpers/createIngredient');
+const createStaple = require('./helpers/createStaple');
 
-//SQL Database
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('testMealPrep', 'root', '', {
-//   dialect: 'mysql',
-//   host: 'localhost',
-//   operatorsAliases: false
-// });
 
 sequelize
   .authenticate()
@@ -32,14 +25,26 @@ sequelize.sync()
 })
 .then(()=>{
   createIngredient({
-  Name: 'Broccoli' ,
-  Vegetarian: false ,
-  Calories: 150 ,
-  Protein: 15000 ,
-  Carb: 0 ,
-  Fat: 4
+  name: 'testIngredient' ,
+  vegetarian: true ,
+  staple: true,
+  calories: 10 ,
+  protein: 10 ,
+  carb: 10 ,
+  fat: 10
 });
 })
+.then(()=>{
+  createStaple({
+  name: 'testStaple' ,
+  vegetarian: false ,
+  calories: 30 ,
+  protein: 30 ,
+  carb: 30 ,
+  fat: 30
+});
+})
+
 
 .catch(err => {
     console.error('Unable to sync to the database:', err);
@@ -48,30 +53,6 @@ sequelize.sync()
 
 //Node Server
 const NodePort = 8000;
-
-
-// parameter middleware that will run before the next routes
-app.param('name', function(req, res, next, name) {
-
-    // check if the user with that name exists
-    // do some validations
-    // add -dude to the name
-    var modified = name + '-dude';
-
-    // save name to the request
-    req.name = modified;
-
-    next();
-});
-
-// http://localhost:8080/api/users/chris
-app.get('/api/users/:name', function(req, res) {
-    // the user was found and is available in req.user
-    res.send('What is up ' + req.name + '!');
-});
-
-
-
 
 
 //ROUTES
