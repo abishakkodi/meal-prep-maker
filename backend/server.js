@@ -4,10 +4,15 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const x = require('./mealPlanner');
 const sequelize = require('./mysqlDB.js').db;
+
+//Helper SQL Functions
 const createIngredient = require('./helpers/createIngredient');
 const createStaple = require('./helpers/createStaple');
+const createRecipe = require('./helpers/createRecipe');
+const readRecipes = require('./helpers/readRecipes');
+
+const reset = { force: false };
 
 
 sequelize
@@ -19,34 +24,47 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-sequelize.sync()
-.then(()=>{
-  console.log('Synced to DB');
-})
-.then(()=>{
-  createIngredient({
-  name: 'testIngredient' ,
-  vegetarian: true ,
-  staple: true,
-  calories: 10 ,
-  protein: 10 ,
-  carb: 10 ,
-  fat: 10
-});
-})
-.then(()=>{
-  createStaple({
-  name: 'testStaple' ,
-  vegetarian: false ,
-  calories: 30 ,
-  protein: 30 ,
-  carb: 30 ,
-  fat: 30
-});
-})
+sequelize.sync(reset)
+  .then(() => {
+    console.log('Synced to DB');
+  })
+  .then(() => {
+    createIngredient({
+      name: 'testIngredient',
+      vegetarian: true,
+      staple: true,
+      calories: 10,
+      protein: 10,
+      carb: 10,
+      fat: 10
+    });
+  })
+  .then(() => {
+    createStaple({
+      name: 'testStaple',
+      vegetarian: false,
+      calories: 30,
+      protein: 30,
+      carb: 30,
+      fat: 30
+    });
+  })
+
+  .then(()=>{
+    for( let i = 0; i < 15; i++) {
+      createRecipe({
+      name: 'recipe ' + JSON.stringify(i),
+      calories: (i * 10),
+      description: 'some text',
+      steps: 'some text',
+      vegetarian: true,
+      pictureLink: 'some url'
+    });
+    }
 
 
-.catch(err => {
+  })
+  .catch(err => {
     console.error('Unable to sync to the database:', err);
   });
 
@@ -60,9 +78,23 @@ app.get('/', (req, res) => {
   res.send('Test Res ');
 });
 
-app.post('/createIngredient', (req, res)=>{
+app.get('/readRecipes', (req, res) => {
+  readRecipes();
+});
+
+app.post('/createIngredient', (req, res) => {
   const created = createIngredient(req.body);
-  if(created) console.log('Created ' + req.body.name); //?
+  if (created) console.log('Created ' + req.body.name); //?
+});
+
+app.post('/createRecipe', (req, res) => {
+  const created = createRecipe(req.body);
+  if (created) console.log('Created ' + req.body.name); //?
+});
+
+app.post('/createStaple', (req, res) => {
+  const created = createStaple(req.body);
+  if (created) console.log('Created ' + req.body.name); //?
 });
 
 
