@@ -51,14 +51,15 @@ sequelize.sync(reset)
   })
 
   .then(()=>{
-    for( let i = 0; i < 15; i++) {
+    for( let i = 0; i < 3; i++) {
       createRecipe({
       name: 'recipe ' + JSON.stringify(i),
       calories: (i * 10),
       description: 'some text',
       steps: 'some text',
       vegetarian: true,
-      pictureLink: 'some url'
+      pictureLink: 'some url',
+      recipeIngredients: [1,2,3]
     });
     }
 
@@ -80,6 +81,11 @@ app.get('/', (req, res) => {
 
 app.get('/readRecipes', (req, res) => {
   readRecipes();
+  res.send(`
+        <h4>
+          Recipe Read and Sent
+        </h4>
+    `)
 });
 
 app.post('/createIngredient', (req, res) => {
@@ -96,6 +102,9 @@ app.post('/createStaple', (req, res) => {
   const created = createStaple(req.body);
   if (created) console.log('Created ' + req.body.name); //?
 });
+
+
+
 
 
 

@@ -9,7 +9,7 @@ const readRecipes = (req) =>{
 sequelize.query( query , {model: Recipes})
 .then((recipes)=> {
   recipes.forEach((recipe)=>{
-    console.log(recipe.dataValues.name)
+    console.log(recipe.dataValues)
   })
 })
 .catch((err)=> {

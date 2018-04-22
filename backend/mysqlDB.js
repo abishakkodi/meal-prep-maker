@@ -15,13 +15,13 @@ const Recipes = sequelize.define('recipes', {
 });
 
 const RecipeStaples = sequelize.define('recipeStaples', {
-  recipeID: Sequelize.INTEGER ,
+  recipeID: Sequelize.INTEGER,
   stapleID: Sequelize.INTEGER
 });
 
 const RecipeIngredients = sequelize.define('recipeIngredients', {
   recipeID: Sequelize.INTEGER ,
-  ingredientsID: Sequelize.INTEGER
+  ingredientID: Sequelize.INTEGER
 });
 
 const Staples = sequelize.define('staples', {
@@ -43,11 +43,19 @@ const Ingredients = sequelize.define('ingredients', {
   fat: Sequelize.INTEGER
 });
 
+const Users = sequelize.define('users', {
+  email: Sequelize.STRING,
+  password: Sequelize.STRING,
+  vegetarian: Sequelize.BOOLEAN,
+  favorites: Sequelize.INTEGER
+});
 
 const db = { Recipes,
             RecipeStaples,
+            RecipeIngredients,
             Staples,
             Ingredients,
+            Users,
             db: sequelize
 };
 
