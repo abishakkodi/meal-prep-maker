@@ -1,6 +1,8 @@
 const Recipes = require('../mysqlDB.js').Recipes;
 const sequelize = require('../mysqlDB.js').db;
 
+// randomly reads 10 recipes stored in DB
+// possibly store in local state/redux state?
 
 const readRecipes = (req) =>{
   let query = 'SELECT * FROM recipes ORDER BY RAND() LIMIT 10'

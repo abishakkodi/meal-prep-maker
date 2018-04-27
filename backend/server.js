@@ -11,6 +11,7 @@ const createIngredient = require('./helpers/createIngredient');
 const createStaple = require('./helpers/createStaple');
 const createRecipe = require('./helpers/createRecipe');
 const readRecipes = require('./helpers/readRecipes');
+const onLoad = require('./helpers/onLoad')
 const reset = { force: false }; //
 
 sequelize
@@ -74,6 +75,7 @@ const NodePort = 8000;
 
 //ROUTES
 app.get('/', (req, res) => {
+  onLoad();
   res.send('Test Res ');
 });
 
@@ -83,7 +85,7 @@ app.get('/readRecipes', (req, res) => {
         <h4>
           Recipe Read and Sent
         </h4>
-    `)
+    `);
 });
 
 app.post('/createIngredient', (req, res) => {

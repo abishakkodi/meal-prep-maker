@@ -1,5 +1,6 @@
 const Recipes = require('../mysqlDB.js').Recipes;
 const RecipeIngredients = require('../mysqlDB.js').RecipeIngredients;
+const Recipestaples = require('../mysqlDB.js').Recipestaples;
 
 const _ = require('lodash');
 
@@ -7,7 +8,7 @@ const _ = require('lodash');
 const createRecipe = (recipeObj) => {
   let createdRecipe;
   const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink']);
-  const recipeIngredients = recipeObj.recipeIngredients;
+  const ingredientIDs = recipeObj.recipeIngredients;
 
   Recipes
   .findOrCreate(
@@ -17,7 +18,7 @@ const createRecipe = (recipeObj) => {
 
   .spread((recipe, created)=>{
     createdRecipe = created;
-    createRecipeIngredients(recipe.dataValues.id, recipeIngredients);
+    createRecipeIngredients(recipe.dataValues.id, ingredientIDs);
   })
 
   .then(()=> {
@@ -43,7 +44,26 @@ const createRecipeIngredients = (recipeID, ingredientIDs) => {
     })
 
     .catch((err)=>{
-    console.log('Recipe Not built :', err);
+    console.log('Recipe Ingredients Not Added :', err);
+    });
+  });
+}
+
+const createRecipeStaples = (recipeID, ingredientIDs) => {
+  ingredientIDs.forEach((ingredientID)=> {
+    let recipeIngredientRow = { recipeID, ingredientID };
+    RecipeIngredients
+    .findOrCreate({
+      where: recipeIngredientRow,
+      defaults: recipeIngredientRow
+    })
+
+    .spread((ingredientRow, created)=> {
+      console.log('CREATED NEW RECIPE/INGREDIENT ROW?',created);
+    })
+
+    .catch((err)=>{
+    console.log('Recipe Ingredients Not Added :', err);
     });
   });
 }
