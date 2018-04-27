@@ -11,9 +11,7 @@ const createIngredient = require('./helpers/createIngredient');
 const createStaple = require('./helpers/createStaple');
 const createRecipe = require('./helpers/createRecipe');
 const readRecipes = require('./helpers/readRecipes');
-
-const reset = { force: false };
-
+const reset = { force: false }; //
 
 sequelize
   .authenticate()
@@ -51,7 +49,7 @@ sequelize.sync(reset)
   })
 
   .then(()=>{
-    for( let i = 0; i < 3; i++) {
+    for( let i = 0; i < 5; i++) {
       createRecipe({
       name: 'recipe ' + JSON.stringify(i),
       calories: (i * 10),

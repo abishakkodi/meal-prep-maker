@@ -5,8 +5,7 @@ const _ = require('lodash');
 
 
 const createRecipe = (recipeObj) => {
-  let createdRecipe, recipeID;
-
+  let createdRecipe;
   const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink']);
   const recipeIngredients = recipeObj.recipeIngredients;
 
@@ -18,16 +17,10 @@ const createRecipe = (recipeObj) => {
 
   .spread((recipe, created)=>{
     createdRecipe = created;
-    console.log('RECIPE OBJ', recipe.dataValues);
-    console.log('RECIPE OBJ ID', recipe.dataValues.id);
-
-    recipeID = recipe.dataValues.id
-    createRecipeIngredients(recipeID, recipeIngredients);
+    createRecipeIngredients(recipe.dataValues.id, recipeIngredients);
   })
 
   .then(()=> {
-    console.log('CREATED RECIPE?', createdRecipe);
-
     return createdRecipe;
   })
 
@@ -50,11 +43,9 @@ const createRecipeIngredients = (recipeID, ingredientIDs) => {
     })
 
     .catch((err)=>{
-    console.log('Recipe Not built :', err );
+    console.log('Recipe Not built :', err);
     });
-
   });
-
 }
 
 
