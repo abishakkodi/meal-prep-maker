@@ -1,0 +1,9 @@
+Order of actions to happen
+
+1. Request sent to server
+2. Server responds with initial recipes
+
+
+4.
+5.
+6.

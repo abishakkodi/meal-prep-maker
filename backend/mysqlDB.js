@@ -11,7 +11,8 @@ const Recipes = sequelize.define('recipes', {
   description: Sequelize.TEXT,
   steps: Sequelize.TEXT,
   vegetarian: Sequelize.BOOLEAN,
-  pictureLink: Sequelize.STRING
+  pictureLink: Sequelize.STRING,
+  category: Sequelize.STRING
 });
 
 const RecipeStaples = sequelize.define('recipeStaples', {

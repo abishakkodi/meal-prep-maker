@@ -6,8 +6,9 @@ const _ = require('lodash');
 
 const createRecipe = (recipeObj) => {
   let createdRecipe;
-  const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink']);
+  const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink','category']);
   const recipeIngredients = recipeObj.recipeIngredients;
+  console.log('RECIPE INGREDIENTS', recipeIngredients);
 
   Recipes
   .findOrCreate(
@@ -17,6 +18,7 @@ const createRecipe = (recipeObj) => {
 
   .spread((recipe, created)=>{
     createdRecipe = created;
+    console.log(recipe.dataValues.id);
     createRecipeIngredients(recipe.dataValues.id, recipeIngredients);
   })
 
@@ -30,6 +32,8 @@ const createRecipe = (recipeObj) => {
 }
 
 const createRecipeIngredients = (recipeID, ingredientIDs) => {
+  console.log('THIS IS THE RECIPE ID: ', recipeID);
+  console.log('THESE ARE THE INGREDIENT IDS:', ingredientIDs);
   ingredientIDs.forEach((ingredientID)=> {
     let recipeIngredientRow = { recipeID, ingredientID };
     RecipeIngredients

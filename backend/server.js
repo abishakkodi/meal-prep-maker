@@ -57,7 +57,8 @@ sequelize.sync(reset)
       steps: 'some text',
       vegetarian: true,
       pictureLink: 'some url',
-      recipeIngredients: [1,2,3]
+      recipeIngredients: [1*i,2*i,3*i],
+      category: 'breakfast'
     });
     }
 
