@@ -43,7 +43,7 @@ const createRecipeIngredients = (recipeID, ingredientIDs) => {
     })
 
     .spread((ingredientRow, created)=> {
-      console.log('CREATED NEW RECIPE/INGREDIENT ROW?',created);
+      console.log('CREATED NEW RECIPE/INGREDIENT ROW?', created);
     })
 
     .catch((err)=>{
