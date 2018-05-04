@@ -7,8 +7,9 @@ const _ = require('lodash');
 
 const createRecipe = (recipeObj) => {
   let createdRecipe;
-  const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink']);
-  const ingredientIDs = recipeObj.recipeIngredients;
+  const filtered = _.pick(recipeObj, ['name', 'calories', 'description', 'steps', 'vegetarian', 'pictureLink','category']);
+  const recipeIngredients = recipeObj.recipeIngredients;
+  console.log('RECIPE INGREDIENTS', recipeIngredients);
 
   Recipes
   .findOrCreate(
@@ -18,7 +19,9 @@ const createRecipe = (recipeObj) => {
 
   .spread((recipe, created)=>{
     createdRecipe = created;
-    createRecipeIngredients(recipe.dataValues.id, ingredientIDs);
+
+    console.log(recipe.dataValues.id);
+    createRecipeIngredients(recipe.dataValues.id, recipeIngredients);
   })
 
   .then(()=> {
@@ -31,6 +34,8 @@ const createRecipe = (recipeObj) => {
 }
 
 const createRecipeIngredients = (recipeID, ingredientIDs) => {
+  console.log('THIS IS THE RECIPE ID: ', recipeID);
+  console.log('THESE ARE THE INGREDIENT IDS:', ingredientIDs);
   ingredientIDs.forEach((ingredientID)=> {
     let recipeIngredientRow = { recipeID, ingredientID };
     RecipeIngredients
@@ -40,7 +45,7 @@ const createRecipeIngredients = (recipeID, ingredientIDs) => {
     })
 
     .spread((ingredientRow, created)=> {
-      console.log('CREATED NEW RECIPE/INGREDIENT ROW?',created);
+      console.log('CREATED NEW RECIPE/INGREDIENT ROW?', created);
     })
 
     .catch((err)=>{

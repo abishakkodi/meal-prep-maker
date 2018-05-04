@@ -12,6 +12,8 @@ const createStaple = require('./helpers/createStaple');
 const createRecipe = require('./helpers/createRecipe');
 const readRecipes = require('./helpers/readRecipes');
 const onLoad = require('./helpers/onLoad')
+const initDatabase = require('./initDatabase');
+const mealPlanner = require('./mealPlanner');
 const reset = { force: false }; //
 
 sequelize
@@ -27,17 +29,13 @@ sequelize.sync(reset)
   .then(() => {
     console.log('Synced to DB');
   })
-  .then(() => {
-    createIngredient({
-      name: 'testIngredient',
-      vegetarian: true,
-      staple: true,
-      calories: 10,
-      protein: 10,
-      carb: 10,
-      fat: 10
-    });
+  .then(()=>{
+
+    initDatabase();
+
   })
+
+
   .then(() => {
     createStaple({
       name: 'testStaple',
@@ -58,7 +56,8 @@ sequelize.sync(reset)
       steps: 'some text',
       vegetarian: true,
       pictureLink: 'some url',
-      recipeIngredients: [1,2,3]
+      recipeIngredients: [1*i,2*i,3*i],
+      category: 'breakfast'
     });
     }
 
@@ -86,6 +85,12 @@ app.get('/readRecipes', (req, res) => {
           Recipe Read and Sent
         </h4>
     `);
+});
+
+app.get('/mealPlanner', (req, res)=> {
+  mealPlanner();
+  res.send('Meal Planned');
+
 });
 
 app.post('/createIngredient', (req, res) => {
