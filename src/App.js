@@ -1,19 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './Components/Navbar';
+
+const context = React.createContext();
+class ContextProvider extends Component {
+  state = { name: 'MealPrepRecipes',
+  age: 10
+
+  }
+
+  render(){
+    return (
+      <context.Provider value={
+        {
+  state: this.state,
+  someFunc: ()=>{
+    this.setState({ age: this.state.age + 1 });
+  }
+}
+                              }>
+        {this.props.children}
+      </context.Provider>
+      )
+  }
+}
+
+class Child extends Component {
+  render(){
+    return (
+      <div>
+        <h3>{this.props.name} </h3>
+        <context.Consumer>
+          {(context)=>(
+            <div>
+              <p> Context Context Context </p>
+              <p> This is what is in the context provider {context.state.name} </p>
+            </div>)}
+        </context.Consumer>
+    </div>)
+  }
+}
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      name: 'Test Test Test'
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <ContextProvider>
+        <div className="App">
+          <Navbar />
+          <Child name={this.state.name}/>
+        </div>
+      </ContextProvider>
     );
   }
 }
