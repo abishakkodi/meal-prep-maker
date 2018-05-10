@@ -34,8 +34,6 @@ sequelize.sync(reset)
     initDatabase();
 
   })
-
-
   .then(() => {
     createStaple({
       name: 'testStaple',
@@ -46,7 +44,6 @@ sequelize.sync(reset)
       fat: 30
     });
   })
-
   .then(()=>{
     for( let i = 0; i < 5; i++) {
       createRecipe({
@@ -88,10 +85,14 @@ app.get('/readRecipes', (req, res) => {
 });
 
 app.get('/mealPlanner', (req, res)=> {
-  mealPlanner();
-  res.send('Meal Planned');
+  console.log(mealPlanner());
+  res.send('NOTHING');
 
 });
+
+app.get('/testResponse', (req, res)=> {
+  res.send({message: 'requestReceived'});
+})
 
 app.post('/createIngredient', (req, res) => {
   const created = createIngredient(req.body);

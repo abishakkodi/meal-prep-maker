@@ -30,8 +30,13 @@ const mealPlanner = () => {
   .then((recipes)=> {
     recipes.forEach((recipe)=>{
       meals.push(recipe.dataValues);
-
     });
+
+
+  })
+
+  .then(()=>{
+    return meals;
   })
   .catch((err)=>{
     console.log(err);
