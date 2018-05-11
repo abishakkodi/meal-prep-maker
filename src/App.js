@@ -1,77 +1,51 @@
 import React, { Component } from 'react';
 import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import Recipes from './Components/Recipes';
+import CreateMealplan from './Components/CreateMealplan';
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import { Layout } from 'antd';
 import './App.css';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import Axios from 'axios';
 
-const { Header, Footer, Sider, Content } = Layout;
-
-const context = React.createContext();
-class ContextProvider extends Component {
-  state = { name: 'MealPrepRecipes',
-  age: 10,
-  meals: [],
-  userPreferences: {},
-  loggedIn: false
-  }
-
-  render(){
-    return (
-      <context.Provider value={
-        {
-         state: this.state,
-         someFunc: () => {
-           this.setState({ age: this.state.age + 1 });
-         }
-        }
-                              }>
-        {this.props.children}
-      </context.Provider>
-      )
-  }
-}
-
-class Child extends Component {
-  render(){
-    return (
-      <div>
-        <h3>{this.props.name} </h3>
-        <context.Consumer>
-          {(context)=>(
-            <div>
-              <p> Context Context Context </p>
-              <p> This is what is in the context provider {context.state.name} </p>
-            </div>)}
-        </context.Consumer>
-    </div>)
-  }
-}
-
-
-
+const config = {
+    headers: {'Access-Control-Allow-Origin': '*'}
+};
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: 'Test Test Test'
+      recipes: []
     }
+  }
+
+  componentWillMount(){
+    Axios.get('http://localhost:8000/mealPlanner', config)
+    .then((data)=>{
+      this.setState({recipes: data.data});
+    })
+    .catch((err)=>{
+     console.log(err);
+     }
+    );
   }
 
   render() {
     return (
-      <ContextProvider>
-        <Layout>
-          <div className="App">
-            <div className='bordered'>
-              <Header style={{textAlign: 'center'}}> HEADER AND MENU </Header>
-                <Child name={this.state.name}/>
-            </div>
-
-          </div>
-        </Layout>
-      </ContextProvider>
-    );
+      <Router>
+      <div className='main'>
+        <Navbar />
+        <div className='container'>
+          <Route exact path='/' component={Home} />
+          <Route path='/recipes'component={ Recipes } recipes={this.state.recipes}/>
+          <Route path='/createMealplan'component={ CreateMealplan } recipes={this.state.recipes} />
+        </div>
+      </div>
+      </Router>
+    )
   }
 }
 

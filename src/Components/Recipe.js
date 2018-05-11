@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import Recipe from './Recipe';
+import { Card } from 'antd';
+
 
 class Recipes extends Component {
   render() {
     return (
       <div className="Recipes">
-        <h1> Current Recipes </h1>
-        {this.props.route.recipes.map((recipe)=>{
-          console.log(recipe);
-        })}
+       <Card >
+
+       </Card>
+
       </div>
     );
   }

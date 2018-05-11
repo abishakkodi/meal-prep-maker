@@ -2,4 +2,25 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  text-align: center;
 }
+
+
+#menu-outer {
+  height: 84px;
+}
+
+.table {
+  display: table;   /* Allow the centering to work */
+  margin: 0 auto;
+}
+
+ul#horizontal-list {
+  min-width: 696px;
+  list-style: none;
+  padding-top: 20px;
+  margin: 15px;
+  }
+  ul#horizontal-list li {
+    display: inline;
+  }

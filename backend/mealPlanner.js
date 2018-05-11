@@ -23,7 +23,7 @@ let mealPlannerPrefs = {
 // find ingredients that correspond to meals id
 // find ingredients object
 
-const mealPlanner = () => {
+const mealPlanner = (req, res) => {
   let meals = [];
   const query = 'SELECT * FROM recipes ORDER BY RAND() LIMIT 14';
   sequelize.query( query, { model: Recipes })
@@ -36,7 +36,7 @@ const mealPlanner = () => {
   })
 
   .then(()=>{
-    return meals;
+    res.status(200).send({data: meals});
   })
   .catch((err)=>{
     console.log(err);
