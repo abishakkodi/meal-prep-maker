@@ -5,11 +5,10 @@ import { Card } from 'antd';
 class Recipes extends Component {
   render() {
     return (
-      <div className="Recipes">
+      <div className="Recipe">
        <Card >
-
+        <p>Recipe </p>
        </Card>
-
       </div>
     );
   }

@@ -40,8 +40,8 @@ class App extends Component {
         <Navbar />
         <div className='container'>
           <Route exact path='/' component={Home} />
-          <Route path='/recipes'component={ Recipes } recipes={this.state.recipes}/>
-          <Route path='/createMealplan'component={ CreateMealplan } recipes={this.state.recipes} />
+          <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
+          <Route path='/createMealplan'component={ CreateMealplan }  />
         </div>
       </div>
       </Router>
