@@ -22,10 +22,6 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .bordered {
   padding: 10px;
@@ -54,3 +50,13 @@
     margin-top: 10px;
 
 }
+
+nav {
+  background-color: #00F;
+  overflow: hidden;
+  padding: 1em;
+}
+
+  .RouterLink {
+    color: #FFF;
+  }

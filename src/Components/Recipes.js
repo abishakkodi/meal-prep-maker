@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import Recipe from './Recipe';
-import { Card } from 'antd';
+import '../index.css';
 
 
 class Recipes extends Component {
-  constructor(props){
-    super(props);
-  }
-
   render() {
     let recipe = this.props.recipes.data;
     if(!recipe) {
@@ -17,13 +13,15 @@ class Recipes extends Component {
     return (
       <div className="Recipes">
         <h1> Current Recipes </h1>
+        <div className="recipesList">
         {
-          recipe.map((item,id)=>{
+          recipe.map((recipeData,id)=>{
           return(<div key={id}>
-            <Card title={'some recipe'} />
+              <Recipe recipeData={recipeData}/>
             </div>)
           })
         }
+        </div>
       </div>
           )
 

@@ -3,10 +3,7 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Recipes from './Components/Recipes';
 import CreateMealplan from './Components/CreateMealplan';
-
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-import { Layout } from 'antd';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Axios from 'axios';
 
@@ -36,14 +33,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div className='main'>
-        <Navbar />
-        <div className='container'>
-          <Route exact path='/' component={Home} />
-          <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
-          <Route path='/createMealplan'component={ CreateMealplan }  />
+        <div className='main'>
+          <Navbar />
+          <div className='container'>
+            <Route exact path='/' component={Home} />
+            <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
+            <Route path='/createMealplan'component={ CreateMealplan }  />
+          </div>
         </div>
-      </div>
       </Router>
     )
   }

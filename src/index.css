@@ -8,6 +8,7 @@ body {
 
 #menu-outer {
   height: 84px;
+
 }
 
 .table {
@@ -20,7 +21,25 @@ ul#horizontal-list {
   list-style: none;
   padding-top: 20px;
   margin: 15px;
+  outline: none;
+  text-decoration: none;
   }
   ul#horizontal-list li {
     display: inline;
+    outline: none;
+    text-decoration: none;
   }
+
+  ul> li {
+    min-width: 696px;
+    list-style: none;
+    padding-top: 20px;
+    margin: 15px;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .recipesList {
+    float: left;
+  }
+
