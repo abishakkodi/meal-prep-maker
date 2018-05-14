@@ -39,7 +39,17 @@ ul#horizontal-list {
     text-decoration: none;
   }
 
-  .recipesList {
-    float: left;
+  .recipesListContainer {
+    text-align: center;
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
   }
+
+.recipeCard {
+  padding: 10px;
+  margin: 2px;
+}
+
 
