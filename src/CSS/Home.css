@@ -1,0 +1,11 @@
+.homeContainer {
+  text-align: center;
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.homeWhat {
+
+}

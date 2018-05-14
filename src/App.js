@@ -35,7 +35,7 @@ class App extends Component {
       <Router>
         <div className='main'>
           <Navbar />
-          <div className='container'>
+          <div>
             <Route exact path='/' component={Home} />
             <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
             <Route path='/createMealplan'component={ CreateMealplan }  />

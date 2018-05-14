@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Recipe from './Recipe';
-import '../index.css';
+import '../CSS/Recipes.css';
 
 
 class Recipes extends Component {
