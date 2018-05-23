@@ -1,14 +1,14 @@
  .NavContainer {
-    text-align: center;
+    text-align: left;
     display: flex;
     max-width: 100%;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
   }
 
   .Link {
     text-decoration: none;
-    color: #000;olor: 'black';
+    color: 'black';
     margin: 5px;
     padding: 2px;
     font-size: 1em;

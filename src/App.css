@@ -3,9 +3,10 @@
 }
 
  .NavContainer {
-    text-align: center;
     display: flex;
     max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;
   }
+
+

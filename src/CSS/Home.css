@@ -9,3 +9,23 @@
 .homeWhat {
 
 }
+
+.whyTitle {
+
+}
+
+.whyList {
+  align-items: left;
+  align-self: flex-start;
+}
+
+.howContent {
+}
+
+.homeImage {
+}
+
+img {
+  height: auto;
+  max-width: 25%;
+}
