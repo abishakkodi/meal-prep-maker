@@ -3,6 +3,8 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Recipes from './Components/Recipes';
 import CreateMealplan from './Components/CreateMealplan';
+import About from './Components/About';
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Axios from 'axios';
@@ -39,6 +41,8 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
             <Route path='/createMealplan'component={ CreateMealplan }  />
+            <Route path='/about'component={ About }  />
+
           </div>
         </div>
       </Router>
