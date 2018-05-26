@@ -11,9 +11,10 @@ class Recipes extends Component {
     }
 
     return (
-      <div className="Recipes">
+
+      <div className="">
         <h1> Current Recipes </h1>
-        <div className="recipesListContainer">
+        <div className="recipesContainer">
         {
           recipe.map((recipeData,id)=>{
           return(<div key={id} className="recipeCard">
