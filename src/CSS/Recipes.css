@@ -4,34 +4,6 @@
 
 }
 
-.table {
-  display: table;   /* Allow the centering to work */
-  margin: 0 auto;
-}
-
-ul#horizontal-list {
-  min-width: 696px;
-  list-style: none;
-  padding-top: 20px;
-  margin: 15px;
-  outline: none;
-  text-decoration: none;
-  }
-  ul#horizontal-list li {
-    display: inline;
-    outline: none;
-    text-decoration: none;
-  }
-
-  ul> li {
-    min-width: 696px;
-    list-style: none;
-    padding-top: 20px;
-    margin: 15px;
-    outline: none;
-    text-decoration: none;
-  }
-
   .recipesListContainer {
     text-align: center;
     display: flex;
