@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   text-align: center;
   font-size: 1em;
+  background: var(--light);
 }
 
 
@@ -10,4 +11,5 @@ body {
   --dark: #333;
   --light: #fff;
   --shadow: 0 1px 5px rgba(104, 104, 0.8);
+  --box: #BABDBDFF;
 }

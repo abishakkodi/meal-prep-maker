@@ -1,21 +1,3 @@
- .NavContainer {
-    text-align: left;
-    display: grid;
-    max-width: 100%;
-    flex-wrap: wrap;
-    justify-content: left;
-  }
-
-  .Link {
-    text-decoration: none;
-    color: 'black';
-    margin: 5px;
-    padding: 2px;
-    font-size: 1em;
-  }
-
-
-
   .gridContainer ul {
     text-decoration: none;
     display: grid;

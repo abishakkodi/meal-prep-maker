@@ -4,11 +4,8 @@ import '../CSS/Home.css';
 const HomeWhy = () => {
 
   return (
-    <div className="homeContainer ">
-      <div> <img src='https://i.imgur.com/ecomSst.jpg'
-      alt=''/>
-      </div>
-      <div >
+    <div className="homeWhyContainer ">
+      <div className='homeWhyText'>
         <h3 className="whyTitle">Why should I meal prep?</h3>
         <p> People meal prep for many reasons</p>
         <div className='whyList'>
@@ -19,6 +16,11 @@ const HomeWhy = () => {
         </ul>
         </div>
       </div>
+
+      <div className='homeWhyImage'>
+        <img src='https://i.imgur.com/ecomSst.jpg' alt=''/>
+      </div>
+
     </div>
         )
 };

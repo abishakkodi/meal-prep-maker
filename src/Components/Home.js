@@ -9,7 +9,7 @@ import HomeHow from './HomeHow';
 class Home extends Component {
   render() {
     return (
-    <div>
+    <div className='homeContainer'>
       <HomeWhat />
       <HomeWhy />
       <HomeHow />
@@ -19,11 +19,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-
-// Component => what is meal prep
-
-// Component => why should i meal prep
-
-// Component => how can I get started
-

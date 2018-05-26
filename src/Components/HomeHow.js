@@ -5,9 +5,9 @@ import '../CSS/Home.css';
 const HomeHow = () => {
 
   return (
-    <div className="homeContainer">
-      <div className="homeImage">
-      <img src='https://i.imgur.com/ecomSst.jpg'
+    <div className="homeHowContainer">
+      <div className="homeHowImage">
+        <img src='https://i.imgur.com/ecomSst.jpg'
       alt=''/>
       </div>
       <div className='howContent'>

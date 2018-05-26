@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Navbar.css';
 
-const linkStyle = { textDecoration: 'none', 'color': 'black', fontSize: '150%'  }
-
-
 class Navbar extends Component {
   render() {
     return (
