@@ -10,6 +10,7 @@ class CreateMealPlan extends Component {
       initialLoad: false,
       recipes: this.props.recipes,
       plan: [],
+      preferences: {},
       calorieBounds: 2000,
       mealSchedule: {
         breakfast: [],
@@ -20,12 +21,7 @@ class CreateMealPlan extends Component {
 }
 
   mealRecommendations(){
-
-  }
-
-  shouldComponentUpdate(){
-
-    return true;
+    //use preferences
   }
 
   componentWillReceiveProps(nextProps){
@@ -37,18 +33,47 @@ class CreateMealPlan extends Component {
 
   render() {
     if(this.state.recipes.length){
+
+
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
+
+
+
+              <h1> Selected Preferences </h1>
+            <div className='preferencesContainer'>
+              <div className='preferencesItem'>
+                <p>Non Vegetarian</p>
+              </div>
+
+              <div className='preferencesItem'>
+                <p>Chicken </p>
+              </div>
+              <div className='preferencesItem'>
+                <p> Eggs </p>
+              </div>
+            </div>
+
             <div className="mealPlanContainer">
                 <h3> Dynamic checkboxes based ingredients in recipes</h3>
                 <h4> Some button to create recipe schedule </h4>
-                  {console.log('STATE',this.state.recipes)}
-                <h2> 7 day columns </h2>
+
+                <h2> X day columns </h2>
+                <div className='daysContainer'>
+
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                </div>
             </div>
           </div>
         );
-    } else {
+    }
+
+  else {
       return (
         <div className="loaderGrid">
           <div className='loader'>

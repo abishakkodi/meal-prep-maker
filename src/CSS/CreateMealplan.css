@@ -12,5 +12,27 @@
   justify-self: center;
 }
 
+.daysContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 5px;
+}
+
+.days {
+  background: var(--box);
+  box-shadow: var(--shadow);
+  min-height: 400px;
+}
+
+.preferencesContainer {
+  display: grid;
+  grid-template-columns: auto;
+    grid-gap: 5px;
+
+}
 
 
+.preferencesItem {
+  color: var(--light);
+  background: var(--dark);
+}
