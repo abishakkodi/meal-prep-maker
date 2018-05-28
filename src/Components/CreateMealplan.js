@@ -7,7 +7,6 @@ class CreateMealPlan extends Component {
   constructor(props){
     super(props);
     this.state = {
-      initialLoad: false,
       recipes: this.props.recipes,
       plan: [],
       preferences: {},
@@ -38,66 +37,6 @@ class CreateMealPlan extends Component {
             <h1> CreateMealPlan </h1>
               <h1> Selected Preferences </h1>
             <div className='preferencesContainer'>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
               <div className='preferencesItem'>
                 <p>Non Vegetarian</p>
               </div>

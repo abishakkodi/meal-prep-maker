@@ -1,1 +1,5 @@
-export { default as example } from './example';
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+
+});
