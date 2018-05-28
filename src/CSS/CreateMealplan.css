@@ -14,7 +14,7 @@
 
 .daysContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 5px;
 }
 
@@ -25,14 +25,14 @@
 }
 
 .preferencesContainer {
-  display: grid;
-  grid-template-columns: auto;
-    grid-gap: 5px;
-
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
 .preferencesItem {
-  color: var(--light);
-  background: var(--dark);
+  background: var(--box);
+  margin: 5px;
+  padding: 5px;
+
 }
