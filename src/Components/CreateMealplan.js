@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { BarLoader } from 'react-spinners';
 import '../CSS/CreateMealplan.css'
 
 
@@ -8,7 +8,7 @@ class CreateMealPlan extends Component {
     super(props);
     this.state = {
       initialLoad: false,
-      recipes: [],
+      recipes: this.props.recipes,
       plan: [],
       calorieBounds: 2000,
       mealSchedule: {
@@ -23,37 +23,20 @@ class CreateMealPlan extends Component {
 
   }
 
-  shouldComponentUpdate(nextProps){
-   const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
-   console.log("UPDATE RECIPE?", newRecipe);
-   return newRecipe;
-  }
+  shouldComponentUpdate(){
 
-  componentDidMount(){
-    let recipeData =  this.props.recipes;
-    this.setState({recipes: recipeData});
+    return true;
   }
 
   componentWillReceiveProps(nextProps){
     const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
     if(newRecipe){
-      this.setState({recipes: nextProps.recipes})
+      this.setState({recipes: nextProps.recipes });
     }
-
   }
 
-
-
   render() {
-
-    if(!this.state.recipes.length){
-      console.log('STATE OF RECIPES: ', this.state.recipes);
-      return (
-        <div>
-          <h2>LOADING .....</h2>
-        </div>
-        )
-    } else {
+    if(this.state.recipes.length){
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
@@ -62,10 +45,20 @@ class CreateMealPlan extends Component {
                 <h4> Some button to create recipe schedule </h4>
                   {console.log('STATE',this.state.recipes)}
                 <h2> 7 day columns </h2>
-
             </div>
           </div>
         );
+    } else {
+      return (
+        <div className="loaderGrid">
+          <div className='loader'>
+            <h3>Loading...</h3>
+            <BarLoader
+            width={200}
+            />
+          </div>
+        </div>
+        )
      }
   }
 }

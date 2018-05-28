@@ -11,7 +11,7 @@ class Recipes extends Component {
     return (
       <div className='cardImage'>
        <Card style={style} hoverable
-       cover={<span> <img alt={info.name} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" /> </span> } >
+       cover={<span> <img alt={info.name} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" /> </span>} >
          <p>Category: {info.category} </p>
          <p>Calories: {info.calories} </p>
          <Meta title={info.name}/>

@@ -5,7 +5,7 @@ import '../CSS/Recipes.css';
 
 class Recipes extends Component {
   render() {
-    let recipe = this.props.recipes.data;
+    let recipe = this.props.recipes;
     if(!recipe) {
       recipe = [];
     }
