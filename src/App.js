@@ -24,7 +24,8 @@ class App extends Component {
   componentWillMount(){
     Axios.get('http://localhost:8000/mealPlanner', config)
     .then((data)=>{
-      this.setState({recipes: data.data});
+      let recipeData = data.data.data;
+      this.setState({recipes: recipeData});
     })
     .catch((err)=>{
      console.log(err);
@@ -40,7 +41,7 @@ class App extends Component {
           <div>
             <Route exact path='/' component={Home} />
             <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
-            <Route path='/createMealplan'component={ CreateMealplan }  />
+            <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={this.state.recipes} />} }/>
             <Route path='/about'component={ About }  />
 
           </div>
