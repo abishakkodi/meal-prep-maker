@@ -1,13 +1,22 @@
+//Modules
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Axios from 'axios';
+import createHistory from 'history/createBrowserHistory';
+import { Provider } from 'react-redux';
+import store from './store';
+
+
+
+//Components
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Recipes from './Components/Recipes';
 import CreateMealplan from './Components/CreateMealplan';
 import About from './Components/About';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+//css
 import './App.css';
-import Axios from 'axios';
 
 const config = {
     headers: {'Access-Control-Allow-Origin': '*'}
@@ -36,7 +45,8 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={createHistory()} >
+       <Provider store={store}>
         <div className='main'>
           <Navbar />
           <div>
@@ -44,9 +54,9 @@ class App extends Component {
             <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
             <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={this.state.recipes} />} }/>
             <Route path='/about'component={ About }  />
-
           </div>
         </div>
+        </Provider>
       </Router>
     )
   }
