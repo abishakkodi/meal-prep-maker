@@ -23,6 +23,7 @@ class CreateMealPlan extends Component {
     //use preferences
   }
 
+
   componentWillReceiveProps(nextProps){
     const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
     if(newRecipe){
