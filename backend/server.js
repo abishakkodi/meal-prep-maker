@@ -14,17 +14,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const sequelize = require('./mysqlDB.js').db;
 
+
+
+//Node Server
+const NodePort = 8000;
+
+
+app.listen(NodePort, ()=>{
+  console.log('listening on NodePort ' + NodePort)
+});
+
+
+// const sequelize = require('./mysqlDB.js').db;
 //Helper SQL Functions
-const createIngredient = require('./helpers/createIngredient');
-const createStaple = require('./helpers/createStaple');
-const createRecipe = require('./helpers/createRecipe');
-const readRecipes = require('./helpers/readRecipes');
-const onLoad = require('./helpers/onLoad')
-const initDatabase = require('./initDatabase');
-const mealPlanner = require('./mealPlanner');
-const reset = { force: false }; //
+// const createIngredient = require('./helpers/createIngredient');
+// const createStaple = require('./helpers/createStaple');
+// const createRecipe = require('./helpers/createRecipe');
+// const readRecipes = require('./helpers/readRecipes');
+// const onLoad = require('./helpers/onLoad')
+// const initDatabase = require('./initDatabase');
+// const mealPlanner = require('./mealPlanner');
+// const reset = { force: false }; //
 
 // sequelize
 //   .authenticate()
@@ -75,8 +86,6 @@ const reset = { force: false }; //
 //   });
 
 
-//Node Server
-const NodePort = 8000;
 
 
 //ROUTES
@@ -116,10 +125,3 @@ const NodePort = 8000;
 // });
 
 
-
-
-
-
-app.listen(NodePort, ()=>{
-  console.log('listening on NodePort ' + NodePort)
-});
