@@ -31,11 +31,10 @@ class App extends Component {
   }
 
   componentWillMount(){
-    Axios.get('http://localhost:8000/mealPlanner', config)
+    Axios.get('http://localhost:8000/readRecipes', config)
     .then((data)=>{
       console.log('Received data from api');
-      let recipeData = data.data.data;
-      this.setState({recipes: recipeData});
+      console.log(data);
     })
     .catch((err)=>{
      console.log(err);
