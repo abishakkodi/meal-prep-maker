@@ -32,8 +32,8 @@ const initialRecipes = [
   steps: [{step: 'someInstruction', order: 0}]
 },
 {
-  name: 'RecipeD',
-  totalCarbs: 400,
+  name: 'RecipeF',
+  totalCarbs: 300,
   totalFats: 400,
   totalCalories: 400,
   totalProteins: 400,
@@ -46,7 +46,7 @@ const initialRecipes = [
 const seedRecipes = () =>{
   let created = false;
   initialRecipes.forEach((recipe)=>{
-  Recipe.findOrCreate(recipe)
+  Recipe.findOrCreate()
 
   .then((recipe)=>{
     if(recipe.created){
