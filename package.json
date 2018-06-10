@@ -12,6 +12,7 @@
     "lodash": "^4.17.5",
     "mongo": "^0.1.0",
     "mongoose": "^5.1.4",
+    "mongoose-findorcreate": "^3.0.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
     "react": "^16.3.1",

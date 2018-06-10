@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate')
+
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
@@ -12,4 +14,7 @@ const recipeSchema = new Schema({
   steps: [{step: String, order: Number}]
 });
 
+recipeSchema.plugin(findOrCreate);
+
 module.exports = mongoose.model('Recipe', recipeSchema);
+

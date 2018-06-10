@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const { connectionInfo } = require('../config.js');
 const mongoose = require('mongoose');
 
+const readRecipes = require('./helpers/mongodb/readRecipes');
+
 mongoose.connect(connectionInfo);
 mongoose.connection.once('open',()=>{
   console.log('Connected to mlab');
@@ -15,6 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 
+//Routes
+app.get('/',(req, res)=>{
+  res.send('Test Response');
+});
+
+app.get('/readRecipes', readRecipes);
+
 
 
 //Node Server
@@ -24,7 +33,6 @@ const NodePort = 8000;
 app.listen(NodePort, ()=>{
   console.log('listening on NodePort ' + NodePort)
 });
-
 
 // const sequelize = require('./mysqlDB.js').db;
 //Helper SQL Functions

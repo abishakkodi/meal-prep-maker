@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate')
+
 const Schema = mongoose.Schema;
 
 const ingredientSchema = new Schema({
@@ -10,5 +12,7 @@ const ingredientSchema = new Schema({
   vegetarian: Boolean,
   image: String
 });
+
+ingredientSchema.plugin(findOrCreate);
 
 module.exports = mongoose.model('Ingredient', ingredientSchema);
