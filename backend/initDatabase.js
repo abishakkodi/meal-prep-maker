@@ -1,11 +1,75 @@
 const Recipe = require('./helpers/schema/Recipe');
 
 const initialRecipes = [
-
-
-
-
+  {
+  name: 'RecipeA',
+  totalCarbs: 100,
+  totalFats: 100,
+  totalCalories: 100,
+  totalProteins: 100,
+  vegetarian: true,
+  ingredients: [{ingredientID: 'someId'}],
+  steps: [{step: 'someInstruction', order: 0}]
+},
+{
+  name: 'RecipeB',
+  totalCarbs: 200,
+  totalFats: 200,
+  totalCalories: 200,
+  totalProteins: 200,
+  vegetarian: true,
+  ingredients: [{ingredientID: 'someId'}],
+  steps: [{step: 'someInstruction', order: 0}]
+},
+{
+  name: 'RecipeC',
+  totalCarbs: 300,
+  totalFats: 300,
+  totalCalories: 300,
+  totalProteins: 300,
+  vegetarian: false,
+  ingredients: [{ingredientID: 'someId'}],
+  steps: [{step: 'someInstruction', order: 0}]
+},
+{
+  name: 'RecipeD',
+  totalCarbs: 400,
+  totalFats: 400,
+  totalCalories: 400,
+  totalProteins: 400,
+  vegetarian: false,
+  ingredients: [{ingredientID: 'someId'}],
+  steps: [{step: 'someInstruction', order: 0}]
+}
 ];
+
+const seedRecipes = () =>{
+  let created = false;
+  initialRecipes.forEach((recipe)=>{
+  Recipe.findOrCreate(recipe)
+
+  .then((recipe)=>{
+    if(recipe.created){
+      created = true;
+      console.log('CREATED!');
+      console.log(recipe.doc)
+    }
+  })
+
+  .catch((err)=>{
+    console.log('Error initializing recipes', err);
+  })
+});
+
+if(!created){
+  console.log('No new documents created');
+}
+
+};
+
+
+module.exports = seedRecipes;
+
 
 
 

@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { connectionInfo } = require('../config.js');
 const mongoose = require('mongoose');
-
+const seedRecipes = require('./initDatabase.js');
 const readRecipes = require('./helpers/mongodb/readRecipes');
 
 mongoose.connect(connectionInfo);
@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+seedRecipes();
+
 
 //Routes
 app.get('/',(req, res)=>{
@@ -23,8 +25,6 @@ app.get('/',(req, res)=>{
 });
 
 app.get('/readRecipes', readRecipes);
-
-
 
 //Node Server
 const NodePort = 8000;
