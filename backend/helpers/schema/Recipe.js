@@ -13,7 +13,8 @@ const recipeSchema = new Schema({
   totalProteins: Number,
   vegetarian: Boolean,
   ingredients: [{ingredientID: String}],
-  steps: [{step: String, order: Number}]
+  steps: [{step: String, order: Number}],
+  category: String
 });
 
 recipeSchema.plugin(findOrCreate);

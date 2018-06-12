@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Axios from 'axios';
-import createHistory from 'history/createBrowserHistory';
-import { Provider } from 'react-redux';
 import store from './store';
 import { connect } from 'react-redux';
 
@@ -11,20 +9,16 @@ import { connect } from 'react-redux';
 
 
 //Components
-import Navbar from './Components/Navbar';
-import Home from './Components/Home';
-import Recipes from './Components/Recipes';
-import CreateMealplan from './Components/CreateMealplan';
-import About from './Components/About';
+import Navbar from './Navbar';
+import Home from './Home';
+import Recipes from './Recipes';
+import CreateMealplan from './CreateMealplan';
+import About from './About';
 
 //css
-import './App.css';
+//import './App.css';
 
-const config = {
-    headers: {'Access-Control-Allow-Origin': '*'}
-};
-
-class App extends Component {
+class Main extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -47,8 +41,6 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={createHistory()} >
-       <Provider store={store}>
         <div className='main'>
           <Navbar />
           <div>
@@ -58,10 +50,10 @@ class App extends Component {
             <Route path='/about'component={ About }  />
           </div>
         </div>
-        </Provider>
-      </Router>
     )
   }
 }
 
-export default App;
+export default Main;
+
+
