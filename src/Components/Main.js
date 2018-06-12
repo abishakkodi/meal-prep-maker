@@ -1,12 +1,8 @@
 //Modules
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Axios from 'axios';
-import store from './store';
+import createHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
-
-
-
 
 //Components
 import Navbar from './Navbar';
@@ -15,45 +11,45 @@ import Recipes from './Recipes';
 import CreateMealplan from './CreateMealplan';
 import About from './About';
 
-//css
-//import './App.css';
+//Actions
+import { fetchRecipes } from '../actions/FetchActions';
+import fakeRecipeData from '../mockData';
+
 
 class Main extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      recipes: []
-    }
-  }
 
   componentWillMount(){
-    Axios.get('http://localhost:8000/readRecipes', config)
-    .then((data)=>{
-      let recipeArray = data.data;
-      this.setState({ recipes: recipeArray})
-      console.log('Received data from api', recipeArray);
-    })
-    .catch((err)=>{
-     console.log(err);
-     }
-    );
+    console.log('in component will mount',this.props);
+    this.props.fetchRecipes()
   }
 
   render() {
     return (
-        <div className='main'>
-          <Navbar />
-          <div>
-            <Route exact path='/' component={Home} />
-            <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.state.recipes} />} }/>
-            <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={this.state.recipes} />} }/>
-            <Route path='/about'component={ About }  />
+        <Router history={createHistory()} >
+          <div className='main'>
+            <Navbar />
+            <div>
+              <Route exact path='/' component={Home} />
+              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={fakeRecipeData} />} }/>
+              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={fakeRecipeData} />} }/>
+              <Route path='/about'component={ About }  />
+            </div>
           </div>
-        </div>
+        </Router>
     )
   }
 }
 
-export default Main;
+const mapStateToProps = state => {
+console.log('In map state to props', state);
+let fakeState = {
+  storedRecipes: state.storedRecipes
+}
+
+return fakeState;
+};
+
+
+export default connect(mapStateToProps, {fetchRecipes})(Main);
 
 

@@ -1,7 +1,7 @@
 import { FETCH_RECIPES, FETCH_INGREDIENTS } from '../actions/types';
 
 const initialState = {
-  reduxrecipes: []
+  storedRecipes: []
 };
 
 export default function(state = initialState, action) {
@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
     case FETCH_RECIPES:
       return {
         ...state,
-        reduxrecipes: action.payload
+        storedRecipes: action.payload
       };
     default:
       return state;
