@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import createHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 //Components
 import Navbar from './Navbar';
@@ -11,16 +12,25 @@ import Recipes from './Recipes';
 import CreateMealplan from './CreateMealplan';
 import About from './About';
 
+
 //Actions
-import { fetchRecipes } from '../actions/FetchActions';
-import fakeRecipeData from '../mockData';
+import { setRecipes } from '../actions/FetchActions';
 
 
 class Main extends Component {
 
-  componentWillMount(){
-    this.props.fetchRecipes();
+ componentWillMount(){
+    axios.get('http://localhost:8000/readRecipes')
+  .then(recipes=>{
+    recipes = recipes.data;
+    this.props.setRecipes(recipes);
+
+  })
+  .catch((err)=> {
+    console.log('ERROR FETCH RECIPES ACTION', err)
+  });
   }
+
 
   render() {
     return (
@@ -29,8 +39,8 @@ class Main extends Component {
             <Navbar />
             <div>
               <Route exact path='/' component={Home} />
-              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} mockData={fakeRecipeData} />} }/>
-              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} mockData={fakeRecipeData} />} }/>
+              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.props.storedRecipes} />} }/>
+              <Route path='/createMealplan'component={CreateMealplan}/>
               <Route path='/about'component={ About }  />
             </div>
           </div>
@@ -41,11 +51,11 @@ class Main extends Component {
 
 const mapStateToProps = state => {
 return ({
-  storedRecipes: state.storedRecipes
+  storedRecipes: state.stored.storedRecipes
   })
 };
 
 
-export default connect(mapStateToProps, {fetchRecipes})(Main);
+export default connect(mapStateToProps, { setRecipes })(Main);
 
 
