@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Recipe from './Recipe';
 import '../CSS/Recipes.css';
 
 
 class Recipes extends Component {
+
+
   render() {
-    let recipe = this.props.recipes;
+
+    let recipe = this.props.mockData;
     if(!recipe) {
       recipe = [];
     }
@@ -16,6 +20,15 @@ class Recipes extends Component {
         <h1> Current Recipes </h1>
         <div className="recipesContainer">
         {
+          this.props.storedRecipes.map((recipeData,id)=>{
+          return(<div key={id} className="recipeCard">
+              <Recipe recipeData={recipeData}/>
+            </div>)
+          })
+        }
+        </div>
+        <div className="recipesContainer">
+        {
           recipe.map((recipeData,id)=>{
           return(<div key={id} className="recipeCard">
               <Recipe recipeData={recipeData}/>
@@ -23,6 +36,7 @@ class Recipes extends Component {
           })
         }
         </div>
+
       </div>
           )
 
@@ -30,4 +44,12 @@ class Recipes extends Component {
     }
 
 
-export default Recipes;
+const mapStateToProps = state => {
+
+return ({
+  storedRecipes: state.storedRecipes
+  })
+};
+
+
+export default connect(mapStateToProps)(Recipes);

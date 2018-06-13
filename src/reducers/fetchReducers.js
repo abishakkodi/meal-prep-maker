@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, FETCH_INGREDIENTS } from '../actions/types';
+import { FETCH_RECIPES } from '../actions/types';
 
 const initialState = {
   storedRecipes: []

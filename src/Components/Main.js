@@ -19,8 +19,7 @@ import fakeRecipeData from '../mockData';
 class Main extends Component {
 
   componentWillMount(){
-    console.log('in component will mount',this.props);
-    this.props.fetchRecipes()
+    this.props.fetchRecipes();
   }
 
   render() {
@@ -30,8 +29,8 @@ class Main extends Component {
             <Navbar />
             <div>
               <Route exact path='/' component={Home} />
-              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={fakeRecipeData} />} }/>
-              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={fakeRecipeData} />} }/>
+              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} mockData={fakeRecipeData} />} }/>
+              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} mockData={fakeRecipeData} />} }/>
               <Route path='/about'component={ About }  />
             </div>
           </div>
@@ -41,12 +40,9 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => {
-console.log('In map state to props', state);
-let fakeState = {
+return ({
   storedRecipes: state.storedRecipes
-}
-
-return fakeState;
+  })
 };
 
 
