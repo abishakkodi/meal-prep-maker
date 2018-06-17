@@ -1,23 +1,12 @@
 //Modules
 import React, { Component } from 'react';
-import { withRouter, Route } from "react-router-dom";
-
+import { withRouter } from "react-router-dom";
+import routes from '../routes';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { ConnectedRouter } from 'connected-react-router'
-
-
-//Components
-import Navbar from './Navbar';
-import Home from './Home';
-import Recipes from './Recipes';
-import CreateMealplan from './CreateMealplan';
-import About from './About';
-
 
 //Actions
 import { setRecipes } from '../actions/FetchActions';
-
 
 class Main extends Component {
 
@@ -25,6 +14,7 @@ class Main extends Component {
     axios.get('http://localhost:8000/readRecipes')
   .then(recipes=>{
     recipes = recipes.data;
+    console.log(recipes);
     this.props.setRecipes(recipes);
   })
   .catch((err)=> {
@@ -35,23 +25,19 @@ class Main extends Component {
   render() {
     return (
           <div className='main'>
-            <Navbar />
-            <div>
-              <Route exact path='/' component={Home} />
-              <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.props.storedRecipes} />} }/>
-              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={this.props.storedRecipes} />} } />
-              <Route path='/about'component={ About }  />
-            </div>
+            { routes }
           </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-return ({
-  storedRecipes: state.stored.storedRecipes
-  })
+  return ({
+    storedRecipes: state.stored.storedRecipes
+    })
 };
+
+const matchDispatchToProps = false;
 
 
 export default withRouter(connect(mapStateToProps, { setRecipes })(Main));

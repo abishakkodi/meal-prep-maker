@@ -1,10 +1,7 @@
 //Modules
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
-import { BrowserRouter as Router } from "react-router-dom";
-import createHistory from 'history/createBrowserHistory';
-
+//import routes from './routes';
+import { ConnectedRouter } from 'connected-react-router'
 
 //Components
 import Main from './Components/Main';
@@ -12,14 +9,11 @@ import Main from './Components/Main';
 //css
 import './App.css';
 
-const App = () => {
+const App = ({history}) => {
       return (
-      <Provider store={store}>
-        <Router history={createHistory()} >
-
-        <Main />
-        </Router>
-      </Provider>
+     <ConnectedRouter history={history}>
+      <Main />
+    </ConnectedRouter>
     )
 }
 

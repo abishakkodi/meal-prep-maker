@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import createHistory from 'history/createBrowserHistory';
 import { BarLoader } from 'react-spinners';
 
 import Recipe from './Recipe';
 import fakeRecipeData from '../mockData';
 import '../CSS/Recipes.css';
+import store from '../store';
 
 
 class Recipes extends Component {
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
   render() {
-    console.log(this.props);
-    let recipes = this.props.recipes;
-    if(recipes === undefined ) {
-
-    }
-
-    if(this.props.recipes.length){
+    const { stored } = store.getState();
+    const { storedRecipes } = stored;
+    if(stored.storedRecipes.length){
       return (
         <div className="">
           <h1> Current Recipes </h1>
           <div className="recipesContainer">
           {
-            recipes.map((recipeData,id)=>{
+            storedRecipes.map((recipeData,id)=>{
             return(<div key={id} className="recipeCard">
                 <Recipe recipeData={recipeData}/>
               </div>)
@@ -47,6 +52,5 @@ class Recipes extends Component {
 
   }
 }
-
 
 export default withRouter(connect()(Recipes));

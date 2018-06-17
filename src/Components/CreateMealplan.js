@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BarLoader } from 'react-spinners';
-import '../CSS/CreateMealplan.css'
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+ import '../CSS/CreateMealplan.css'
+import store from '../store';
 
 
 class CreateMealPlan extends Component {
@@ -18,22 +21,18 @@ class CreateMealPlan extends Component {
       }
   }
 }
+componentDidMount() {
+
+  }
 
   mealRecommendations(){
     //use preferences
   }
 
-
-  // componentWillReceiveProps(nextProps){
-  //   const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
-  //   if(newRecipe){
-  //     this.setState({recipes: nextProps.recipes });
-  //   }
-  // }
-
   render() {
-    console.log(this.props);
-    if(this.props.recipes.length){
+    const { stored } = store.getState();
+    console.log("DATA FROM STORE", stored);
+    if(stored.storedRecipes.length){
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
@@ -85,7 +84,7 @@ class CreateMealPlan extends Component {
   }
 }
 
-export default CreateMealPlan;
+export default withRouter(connect()(CreateMealPlan));
 
 
 // original filter based on calories and vegetarianism
