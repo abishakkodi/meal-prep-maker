@@ -1,9 +1,11 @@
 //Modules
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import createHistory from 'history/createBrowserHistory';
+import { withRouter, Route } from "react-router-dom";
+
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { ConnectedRouter } from 'connected-react-router'
+
 
 //Components
 import Navbar from './Navbar';
@@ -24,27 +26,23 @@ class Main extends Component {
   .then(recipes=>{
     recipes = recipes.data;
     this.props.setRecipes(recipes);
-
   })
   .catch((err)=> {
     console.log('ERROR FETCH RECIPES ACTION', err)
   });
   }
 
-
   render() {
     return (
-        <Router history={createHistory()} >
           <div className='main'>
             <Navbar />
             <div>
               <Route exact path='/' component={Home} />
               <Route path='/recipes'render={ (props)=> { return <Recipes {...props} recipes={this.props.storedRecipes} />} }/>
-              <Route path='/createMealplan'component={CreateMealplan}/>
+              <Route path='/createMealplan'render={ (props)=> { return <CreateMealplan {...props} recipes={this.props.storedRecipes} />} } />
               <Route path='/about'component={ About }  />
             </div>
           </div>
-        </Router>
     )
   }
 }
@@ -56,6 +54,6 @@ return ({
 };
 
 
-export default connect(mapStateToProps, { setRecipes })(Main);
+export default withRouter(connect(mapStateToProps, { setRecipes })(Main));
 
 

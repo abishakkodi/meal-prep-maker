@@ -17,3 +17,16 @@
 }
 
 
+.loaderGrid {
+  display: grid;
+  grid-template-areas:
+  '. centerItem .'
+
+}
+
+.loader {
+  margin-top: 4em;
+  grid-area: centerItem;
+  align-self: center;
+  justify-self: center;
+}

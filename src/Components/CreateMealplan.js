@@ -7,7 +7,7 @@ class CreateMealPlan extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes: this.props.recipes,
+      recipes: [],
       plan: [],
       preferences: {},
       calorieBounds: 2000,
@@ -24,15 +24,16 @@ class CreateMealPlan extends Component {
   }
 
 
-  componentWillReceiveProps(nextProps){
-    const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
-    if(newRecipe){
-      this.setState({recipes: nextProps.recipes });
-    }
-  }
+  // componentWillReceiveProps(nextProps){
+  //   const newRecipe = this.state.recipes.length !== nextProps.recipes.length;
+  //   if(newRecipe){
+  //     this.setState({recipes: nextProps.recipes });
+  //   }
+  // }
 
   render() {
-    if(this.state.recipes.length){
+    console.log(this.props);
+    if(this.props.recipes.length){
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
