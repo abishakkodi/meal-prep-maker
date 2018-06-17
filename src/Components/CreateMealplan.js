@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BarLoader } from 'react-spinners';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
- import '../CSS/CreateMealplan.css'
+import LoadingBar from './LoadingBar';
+import '../CSS/CreateMealplan.css'
 import store from '../store';
 
 
@@ -10,7 +10,6 @@ class CreateMealPlan extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes: [],
       plan: [],
       preferences: {},
       calorieBounds: 2000,
@@ -71,14 +70,7 @@ componentDidMount() {
 
   else {
       return (
-        <div className="loaderGrid">
-          <div className='loader'>
-            <h3>Loading...</h3>
-            <BarLoader
-            width={200}
-            />
-          </div>
-        </div>
+          <LoadingBar />
         )
      }
   }

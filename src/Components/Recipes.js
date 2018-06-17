@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { BarLoader } from 'react-spinners';
-
+import LoadingBar from './LoadingBar';
 import Recipe from './Recipe';
-import fakeRecipeData from '../mockData';
 import '../CSS/Recipes.css';
 import store from '../store';
 
 
 class Recipes extends Component {
-
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
-
   render() {
     const { stored } = store.getState();
     const { storedRecipes } = stored;
@@ -39,14 +28,7 @@ class Recipes extends Component {
       );
     } else {
       return (
-        <div className="loaderGrid">
-          <div className='loader'>
-            <h3>Loading...</h3>
-            <BarLoader
-            width={200}
-            />
-          </div>
-        </div>
+        <LoadingBar />
         )
     }
 

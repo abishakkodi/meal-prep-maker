@@ -18,7 +18,7 @@ class Main extends Component {
     this.props.setRecipes(recipes);
   })
   .catch((err)=> {
-    console.log('ERROR FETCH RECIPES ACTION', err)
+    console.log('ERROR FETCH RECIPES ACTION', err);
   });
   }
 

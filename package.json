@@ -25,6 +25,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-spinners": "^0.3.2",
+    "reactjs-popup": "^1.1.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.37.6"
