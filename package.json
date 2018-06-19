@@ -16,6 +16,7 @@
     "mongoose-findorcreate": "^3.0.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
+    "pg": "^7.4.3",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-flexbox-grid": "^2.1.0",

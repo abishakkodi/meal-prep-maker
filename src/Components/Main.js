@@ -14,7 +14,6 @@ class Main extends Component {
     axios.get('http://localhost:8000/readRecipes')
   .then(recipes=>{
     recipes = recipes.data;
-    console.log(recipes);
     this.props.setRecipes(recipes);
   })
   .catch((err)=> {
@@ -36,8 +35,6 @@ const mapStateToProps = state => {
     storedRecipes: state.stored.storedRecipes
     })
 };
-
-const matchDispatchToProps = false;
 
 
 export default withRouter(connect(mapStateToProps, { setRecipes })(Main));
