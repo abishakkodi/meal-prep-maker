@@ -16,54 +16,91 @@ const Connnection = new Sequelize(
 const Recipe = Connnection.define('recipe', {
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     link: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     imageURL: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     multiplier: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     vegetarian: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: true
+    },
+    BLD: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 
 });
 
-const Ingredients = Connnection.define('ProteinIngredient', {
+
+const Ingredient = Connnection.define('ingredient', {
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     vegetarian: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     staple: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false
+        type: Sequelize.BOOLEAN,
+        allowNull: true
     }
 });
 
-const RecipeInstructions = Connnection.define('instructions', {
-
+const RecipeInstruction = Connnection.define('instruction', {
+    name: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    stepId: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
+    step: {
+      type: Sequelize.STRING,
+      allowNull: true
+    }
 });
 
+Recipe.hasMany(Ingredient);
+Recipe.hasMany(RecipeInstruction);
+Ingredient.belongsTo(Recipe);
+RecipeInstruction.belongsTo(Recipe);
 
+const instructionsArray = [0,1,2,3,4];
 
 Connnection.sync({ force: true })
     .then(() => {
         console.log('\n\n\n POSTGRES CONNECTED');
     })
-    .then(()=>{
+    .then(() => {
+        _.times(5, () => {
+            return Recipe.create({
+                    name: Faker.name.firstName(),
+                    vegetarian: Faker.random.boolean()
+                })
+                .then((recipe) => {
+                  console.log('\n\n',recipe.name);
+                  _.times(7, ()=>{
+                    return recipe.createIngredient({
+                        name: Faker.name.lastName(),
+                        vegetarian: Faker.random.boolean()
+                    });
+                  });
 
-    });
+                })
+        })
+    })
+    .catch((err) => (console.log(err)));
 
 module.exports = Connnection;
