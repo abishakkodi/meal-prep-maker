@@ -5,7 +5,6 @@ import LoadingBar from './LoadingBar';
 import '../CSS/CreateMealplan.css'
 import store from '../store';
 
-
 class CreateMealPlan extends Component {
   constructor(props){
     super(props);
@@ -18,14 +17,14 @@ class CreateMealPlan extends Component {
         lunch: [],
         dinner: []
       }
+    }
   }
-}
-componentDidMount() {
+  componentDidMount() {
 
   }
 
   mealRecommendations(){
-    //use preferences
+    //server side or client? 
   }
 
   render() {

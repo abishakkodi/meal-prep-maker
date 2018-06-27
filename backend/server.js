@@ -1,9 +1,11 @@
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { connectionInfo } = require('../config.js');
 const mongoose = require('mongoose');
+const postgresDB = require('./postgresDB.js');
 const seedRecipes = require('./initDatabase.js');
 const readRecipes = require('./helpers/mongodb/readRecipes');
 

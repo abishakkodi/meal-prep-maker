@@ -1,3 +1,11 @@
 I want a non logged in user to be able to see difference recipes on the site
 
 I want a non logged in user to be able to make a meal plan
+
+Paths
+
+1. Fix backend to get better schema and information
+
+2. Once data is able to be stored more properly with more examples then start populating the data
+
+3. 

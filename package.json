@@ -9,6 +9,7 @@
     "connected-react-router": "^4.3.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "history": "^4.7.2",
     "lodash": "^4.17.5",
     "mongo": "^0.1.0",
