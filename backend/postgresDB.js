@@ -79,7 +79,7 @@ RecipeInstruction.belongsTo(Recipe);
 
 const instructionsArray = [0,1,2,3,4];
 
-Connnection.sync({ force: true })
+Connnection.sync({ force: false })
     .then(() => {
         console.log('\n\n\n POSTGRES CONNECTED');
     })
