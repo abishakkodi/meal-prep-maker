@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const postgresDB = require('./postgresDB.js');
 const seedRecipes = require('./initDatabase.js');
 const readRecipes = require('./helpers/mongodb/readRecipes');
+const readWithPreferences = require('./helpers/readWithPreferences');
+
 
 mongoose.connect(connectionInfo);
 mongoose.connection.once('open',()=>{
@@ -18,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-seedRecipes();
+//seedRecipes();
 
 
 //Routes
@@ -27,6 +29,7 @@ app.get('/',(req, res)=>{
 });
 
 app.get('/readRecipes', readRecipes);
+app.get('/readWithPreferences', readWithPreferences);
 
 //Node Server
 const NodePort = 8000;
