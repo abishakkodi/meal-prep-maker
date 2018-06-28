@@ -1,12 +1,24 @@
 const _ = require('lodash');
+var Connnection = require('..../backend/postgresDB.js');
+
+
+
+const exampleReq = {
+  vegetarian: false,
+  days: 5,
+  preference: ['chicken', 'steak', 'eggs', 'green beans'],
+  calories: 1500
+};
+
 
 const readWithPreferences = (res, req) => {
   let initial = [];
 
 
-
+  res.status(200).send()
 }
 
+module.exports = readWithPreferences;
 
 /*
 
