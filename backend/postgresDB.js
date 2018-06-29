@@ -11,8 +11,6 @@ const Connnection = new Sequelize(
     }
 );
 
-
-
 const ProteinRecipe = Connnection.define('proteinRecipe', {
     name: {
         type: Sequelize.STRING,
@@ -126,7 +124,7 @@ const RecipeInstruction = Connnection.define('instruction', {
         allowNull: true
     },
     step: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true
     }
 });
@@ -150,7 +148,7 @@ Ingredient.belongsTo(VegetableRecipe);
 RecipeInstruction.belongsTo(VegetableRecipe);
 
 
-const instructionsArray = [0, 1, 2, 3, 4];
+const instructionsArray = [0, 1, 2];
 
 Connnection.sync({ force: true })
     .then(() => {
@@ -158,31 +156,38 @@ Connnection.sync({ force: true })
     })
 
     .then(() => {
-        _.times(7, () => {
+        _.times(3, () => {
             return ProteinRecipe.create({
-                    name: Faker.name.firstName(),
+                    name: `PROTEIN: ${Faker.name.firstName()}`,
                     vegetarian: Faker.random.boolean()
                 })
                 .then((recipe) => {
-                    _.times(2, () => {
+                    _.times(3, () => {
                         return recipe.createIngredient({
-                            name: Faker.name.lastName(),
+                            name: `INGREDIENT FROM :${recipe.name}`,
                             vegetarian: Faker.random.boolean()
                         });
                     });
+                instructionsArray.forEach((item, index) => {
+                      recipe.createInstruction({
+                        name: recipe.dataValues.name,
+                        stepId: index,
+                        step: Faker.lorem.sentences()
+                      })
+                    })
                 })
         })
     })
     .then(() => {
         _.times(7, () => {
             return CarbRecipe.create({
-                    name: Faker.name.firstName(),
+                    name: `CARB: ${Faker.name.firstName()}`,
                     vegetarian: Faker.random.boolean()
                 })
                 .then((recipe) => {
-                    _.times(2, () => {
+                    _.times(3, () => {
                         return recipe.createIngredient({
-                            name: Faker.name.lastName(),
+                            name: `INGREDIENT FROM :${recipe.name}`,
                             vegetarian: Faker.random.boolean()
                         });
                     });
@@ -193,16 +198,23 @@ Connnection.sync({ force: true })
     .then(() => {
         _.times(7, () => {
             return VegetableRecipe.create({
-                    name: Faker.name.firstName(),
-                    vegetarian: Faker.random.boolean()
+                    name: `VEGETABLE: ${Faker.name.firstName()}`,
+                    vegetarian: true
                 })
                 .then((recipe) => {
-                    _.times(2, () => {
-                        return recipe.createIngredient({
-                            name: Faker.name.lastName(),
-                            vegetarian: Faker.random.boolean()
+                    _.times(3, () => {
+                        recipe.createIngredient({
+                            name: `INGREDIENT FROM :${recipe.name}`,
+                            vegetarian: true
                         });
                     });
+                    instructionsArray.forEach((item, index) => {
+                      recipe.createInstruction({
+                        name: recipe.dataValues.name,
+                        stepId: index,
+                        step: Faker.lorem.sentences()
+                      })
+                    })
                 })
         })
     })
