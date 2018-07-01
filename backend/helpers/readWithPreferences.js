@@ -22,7 +22,6 @@ const vegetableFilter = { attributes: { exclude: ['createdAt', 'updatedAt', 'car
 const proteinFilter = { attributes: { exclude: ['createdAt', 'updatedAt','carbRecipeId', 'vegetableRecipeId']}}
 const carbFilter = { attributes: { exclude: ['createdAt', 'updatedAt', 'proteinRecipeId', 'vegetableRecipeId']}};
 
-
 const vegetarianQuery = (request) => {
     //let exclusionObj = {attributes: { exclude: null}};
     return (request.vegetarian ? { where: { vegetarian: true } } : {});
@@ -61,76 +60,6 @@ const findRecipe = (model, pref, filter) => {
             return completeResponseObj;
         });
 }
-
-const findProteinRecipes = (pref) => {
-    return ProteinRecipe.findAll(proteinFilter).then(recipes => {
-            return Promise.all(recipes.map((recipe) => {
-                let recipeObj = { info: recipe.dataValues };
-                recipeObj.ingredients = [];
-                return recipe.getIngredients(proteinFilter).then((ingredients) => {
-                    recipeObj.ingredients = ingredients.map(i => i.dataValues);
-                    return recipeObj;
-                }).then(recipeObj => {
-                    return recipe.getInstructions(proteinFilter)
-                        .then(instructions => {
-                            recipeObj.instructions = instructions.map(i => i.dataValues);
-                            return recipeObj;
-                        })
-                })
-            }))
-        })
-        .then((completeResponseObj) => {
-            return completeResponseObj;
-        });
-}
-
-
-const findCarbRecipes = (pref) => {
-    return CarbRecipe.findAll(carbFilter).then(recipes => {
-            return Promise.all(recipes.map((recipe) => {
-                let recipeObj = { info: recipe.dataValues };
-                recipeObj.ingredients = [];
-                return recipe.getIngredients(carbFilter).then((ingredients) => {
-                    recipeObj.ingredients = ingredients.map(i => i.dataValues);
-                    return recipeObj;
-                }).then(recipeObj => {
-                    return recipe.getInstructions(carbFilter)
-                        .then(instructions => {
-                            recipeObj.instructions = instructions.map(i => i.dataValues);
-                            return recipeObj;
-                        })
-                })
-            }))
-        })
-        .then((completeResponseObj) => {
-            return completeResponseObj;
-        });
-}
-
-const findVegetableRecipes = (pref) => {
-
-    return VegetableRecipe.findAll(vegetableFilter).then(recipes => {
-            return Promise.all(recipes.map((recipe) => {
-                let recipeObj = { info: recipe.dataValues };
-                recipeObj.ingredients = [];
-                return recipe.getIngredients(vegetableFilter).then((ingredients) => {
-                    recipeObj.ingredients = ingredients.map(i => i.dataValues);
-                    return recipeObj;
-                }).then(recipeObj => {
-                    return recipe.getInstructions(vegetableFilter)
-                        .then(instructions => {
-                            recipeObj.instructions = instructions.map(i => i.dataValues);
-                            return recipeObj;
-                        })
-                })
-            }))
-        })
-        .then((completeResponseObj) => {
-            return completeResponseObj;
-        });
-}
-
-
 
 
 module.exports = readWithPreferences;
