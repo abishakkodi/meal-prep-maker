@@ -1,38 +1,35 @@
 const _ = require('lodash');
 const Connection = require('../postgresDB.js');
 const Op = Connection.Op;
+const testRes = {response: '...fetching recipes'};
 
 const {
     proteinRecipe: ProteinRecipe,
+    instruction: Instruction,
     ingredient: Ingredient,
     carbRecipe: CarbRecipe,
     vegetableRecipe: VegetableRecipe
 } = Connection.models;
 
-const exampleReq = {
-    vegetarian: false,
-    days: 5,
-    mealsPerDay: 2,
-    preference: ['chicken', 'steak', 'eggs', 'green beans'],
-    calories: 1500
-};
-
 const vegetableFilter = { attributes: { exclude: ['createdAt', 'updatedAt', 'carbRecipeId', 'proteinRecipeId']}}
-const proteinFilter = { attributes: { exclude: ['createdAt', 'updatedAt','carbRecipeId', 'vegetableRecipeId']}}
-const carbFilter = { attributes: { exclude: ['createdAt', 'updatedAt', 'proteinRecipeId', 'vegetableRecipeId']}};
+const proteinFilter   = { attributes: { exclude: ['createdAt', 'updatedAt', 'carbRecipeId', 'vegetableRecipeId']}}
+const carbFilter      = { attributes: { exclude: ['createdAt', 'updatedAt', 'proteinRecipeId', 'vegetableRecipeId']}};
 
-const vegetarianQuery = (request) => {
-    return (request.vegetarian ? { where: { vegetarian: true } } : {});
-}
-
-async function readWithPreferences(req, res) {
-    const proteinRecipes = await findRecipe(ProteinRecipe, null, proteinFilter);
+async function fillRecipesPage(req, res){
+  const proteinRecipes = await findRecipe(ProteinRecipe, null, proteinFilter);
     const vegetableRecipes = await findRecipe(VegetableRecipe, null, vegetableFilter);
     const carbRecipes = await findRecipe(CarbRecipe, null, carbFilter);
-    let responseObj = { protein: proteinRecipes, vegetable: vegetableRecipes, carb: carbRecipes
-    };
-    res.status(200).send(responseObj);
+
+  const responseObj = {
+    protein: proteinRecipes,
+    vegetable: vegetableRecipes,
+    carbs: carbRecipes
+  }
+
+  res.status(200).send(responseObj);
 }
+
+
 
 const findRecipe = (model, pref, filter) => {
   return model.findAll(filter).then(recipes => {
@@ -56,5 +53,4 @@ const findRecipe = (model, pref, filter) => {
         });
 }
 
-
-module.exports = readWithPreferences;
+module.exports = fillRecipesPage;
