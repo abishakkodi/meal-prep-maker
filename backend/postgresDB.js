@@ -158,13 +158,13 @@ Connnection.sync({ force: true })
     .then(() => {
         _.times(3, () => {
             return ProteinRecipe.create({
-                    name: `PROTEIN: ${Faker.name.firstName()}`,
+                    name: `PROTEIN_RECIPE_FROM: ${Faker.name.firstName()}`,
                     vegetarian: Faker.random.boolean()
                 })
                 .then((recipe) => {
                     _.times(3, () => {
                         return recipe.createIngredient({
-                            name: `INGREDIENT FROM :${recipe.name}`,
+                            name: `PROTEIN_RECIPE_INGREDIENT_FROM :${recipe.name}`,
                             vegetarian: Faker.random.boolean()
                         });
                     });

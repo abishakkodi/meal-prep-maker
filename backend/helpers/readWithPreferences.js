@@ -1,5 +1,6 @@
 const _ = require('lodash');
-var Connection = require('../postgresDB.js');
+const Connection = require('../postgresDB.js');
+const Op = Connection.Op;
 
 const { proteinRecipe: ProteinRecipe,
         instruction: Instruction,
@@ -20,68 +21,95 @@ const vegetarianQuery = (request) => {
   return (request.vegetarian? {where: { vegetarian: true}}: {});
 }
 
-const getInstructions = (instructionsPromise, object) => {
-    let steps = [];
-    instructionsPromise
-        .getInstructions()
-        .then((instructionsArray) => {
-          return Promise.all(instructionsArray.map((item) => {
-                  steps.push(item.dataValues);
-              }))
-        })
-        .then(()=>{
-            object.instructions = steps;
-        })
-        .catch((err) => (console.log('error', err)));
-}
+// const getInstructions = (instructionsPromise, object) => {
+//     let steps = [];
+//     instructionsPromise
+//         .getInstructions()
+//         .then((instructionsArray) => {
+//           return Promise.all(instructionsArray.map((item) => {
+//                   steps.push(item.dataValues);
+//               }))
+//         })
+//         .then(()=>{
+//             object.instructions = steps;
+//         })
+//         .catch((err) => (console.log('error', err)));
+// }
 
 console.log('\n\n\n');
 
-const readWithPreferences = (req, res) => {
-          const exclude = vegetarianQuery(exampleReq);
-    /*
-      - get recipes
+async function readWithPreferences(req, res){
+    // const exclude = vegetarianQuery(exampleReq);
+    // ProteinRecipe.findAll(exclude).then(recipes => {
+    //         return Promise.all(recipes.map((recipe) => {
+    //                 let recipeObj = { info: recipe.dataValues, id: recipe.dataValues.id };
+    //                 recipeObj.ingredients = [];
 
-
-    */
-    ProteinRecipe.findAll(exclude)
-      .then((recipes) => {
-         return Promise.all(recipes.map((recipe) => {
-                      let recipeObj = {};
-                      recipeObj.info = recipe.dataValues;
-                      recipeObj.id = recipe.dataValues.id;
-                      recipeObj.recipe = recipe;
-                    return recipeObj;
-                  })
-          ).then((data)=>{
-            console.log(data);
-            return data;
-          })
-        .then((completeResponseObj) => {
-            res.status(200).send(completeResponseObj);
-        })
-      });
+    //                 return recipe.getIngredients().then((ingredients) => {
+    //                         recipeObj.ingredients = ingredients.map(i => i.dataValues);
+    //                 return recipeObj;
+    //                     }).then(recipeObj=>{
+    //                       return recipe.getInstructions()
+    //                       .then(instructions=> {
+    //                         recipeObj.instructions = instructions.map(i => i.dataValues);
+    //                         return recipeObj;
+    //                       })
+    //                     })
+    //             }))
+    //       })
+    //       .then((completeResponseObj) => {
+    //           let responseObj = {};
+    //           responseObj.proteinRecipes = completeResponseObj;
+    //       });
+    const proteinRecipes = await findProteinRecipes();
+    const vegetableRecipe = await findProteinRecipes();
+    const carbRecipe = await findProteinRecipes();
+    let responseObj = {protein: proteinRecipes };
+    res.status(200).send(responseObj);
 }
-// var arr = [
-//   {subarr: [1,2,3]},
-//   {subarr: [4,5,6]},
-//   {subarr: [7,8,9]}
-// ];
-// function processAsync(n) {
-//   return new Promise(function(resolve) {
-//     setTimeout(
-//       function() { resolve(n * n); },
-//       Math.random() * 1e3
-//     );
-//   });
+
+const findProteinRecipes = (pref) => {
+    const ingredientExclude = {attributes: { exclude: ['createdAt', 'updatedAt'] }};
+    const proteinInstructionsExclude = {attributes: { exclude: ['createdAt', 'updatedAt', 'carbRecipeId','vegetableRecipeId'] }};
+    const exclude = vegetarianQuery(exampleReq);
+     return ProteinRecipe.findAll(exclude).then(recipes => {
+            return Promise.all(recipes.map((recipe) => {
+                    let recipeObj = { info: recipe.dataValues, id: recipe.dataValues.id };
+                    recipeObj.ingredients = [];
+                    return recipe.getIngredients(ingredientExclude).then((ingredients) => {
+                            recipeObj.ingredients = ingredients.map(i => i.dataValues);
+                    return recipeObj;
+                        }).then(recipeObj=>{
+                          return recipe.getInstructions(proteinInstructionsExclude)
+                          .then(instructions=> {
+                            recipeObj.instructions = instructions.map(i => i.dataValues);
+                            return recipeObj;
+                          })
+                        })
+                }))
+          })
+     .then((completeResponseObj) => {
+             return completeResponseObj;
+          });
+}
+
+// const readWithPreferences = (req, res) => {
+//   ProteinRecipe.findAll().then(recipes => {
+//     return Promise.all(recipes.map(recipe => {
+//       let recipeObj = { info: recipe.dataValues }
+//       return recipe.getIngredients()
+//       .then(ingredients => {
+//         recipeObj.instructions = ingredients.map(i => i.dataValues)
+//         // now, return the whole recipe obj:
+//         return recipeObj
+//       })
+//     }))
+//   })
+//   .then(data => {
+//     res.status(200).send({ data })
+//   })
 // }
-// Promise.all(arr.map(function(entity){
-//   return Promise.all(entity.subarr.map(function(item){
-//     return processAsync(item);
-//   }));
-// })).then(function(data) {
-//   console.log(data);
-// });
+
 
 
 
