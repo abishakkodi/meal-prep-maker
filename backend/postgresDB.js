@@ -190,6 +190,14 @@ Connnection.sync({ force: true })
                             name: `INGREDIENT FROM :${recipe.name}`,
                             vegetarian: Faker.random.boolean()
                         });
+
+                    });
+                     instructionsArray.forEach((item, index) => {
+                      recipe.createInstruction({
+                        name: recipe.dataValues.name,
+                        stepId: index,
+                        step: Faker.lorem.sentences()
+                      })
                     });
                 })
         })
@@ -203,7 +211,7 @@ Connnection.sync({ force: true })
                 })
                 .then((recipe) => {
                     _.times(3, () => {
-                        recipe.createIngredient({
+                         recipe.createIngredient({
                             name: `INGREDIENT FROM :${recipe.name}`,
                             vegetarian: true
                         });
