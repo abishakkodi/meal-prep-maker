@@ -22,7 +22,7 @@ async function fillRecipesPage(req, res){
 
   const responseObj = {
     protein: proteinRecipes,
-    vegetable: vegetableRecipes,
+    vegetables: vegetableRecipes,
     carbs: carbRecipes
   }
 
@@ -30,11 +30,10 @@ async function fillRecipesPage(req, res){
 }
 
 
-
 const findRecipe = (model, pref, filter) => {
   return model.findAll(filter).then(recipes => {
             return Promise.all(recipes.map((recipe) => {
-                let recipeObj = { info: recipe.dataValues };
+                let recipeObj = { recipe: recipe.dataValues };
                 recipeObj.ingredients = [];
                 return recipe.getIngredients(filter).then((ingredients) => {
                     recipeObj.ingredients = ingredients.map(i => i.dataValues);
