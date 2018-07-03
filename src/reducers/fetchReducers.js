@@ -1,7 +1,8 @@
 import { FETCH_RECIPES } from '../actions/types';
 
 const initialState = {
-  storedRecipes: []
+  storedRecipes: [],
+  recipesFromDB: []
 };
 
 export default function(state = initialState, action) {

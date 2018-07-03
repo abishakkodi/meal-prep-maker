@@ -4,17 +4,23 @@ import { withRouter } from "react-router-dom";
 import routes from '../routes';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import mockData from '../mockData';
 
 //Actions
-import { setRecipes } from '../actions/FetchActions';
+import { setRecipes, getRecipes } from '../actions/FetchActions';
 
 class Main extends Component {
 
  componentWillMount(){
-    axios.get('http://localhost:8000/readRecipes')
+    axios.get('http://localhost:8000/fillRecipesPage')
   .then(recipes=>{
-    recipes = recipes.data;
-    this.props.setRecipes(recipes);
+    console.log('RECIPES IN MAIN', recipes);
+    const data = recipes.data;
+    this.props.setRecipes(mockData);
+    return data;
+  })
+  .then(data=>{
+    this.props.getRecipes(data);
   })
   .catch((err)=> {
     console.log('ERROR FETCH RECIPES ACTION', err);
@@ -32,11 +38,12 @@ class Main extends Component {
 
 const mapStateToProps = state => {
   return ({
-    storedRecipes: state.stored.storedRecipes
+    storedRecipes: state.stored.storedRecipes,
+    recipes: state.databaseRecipes.recipes
     })
 };
 
 
-export default withRouter(connect(mapStateToProps, { setRecipes })(Main));
+export default withRouter(connect(mapStateToProps, { setRecipes, getRecipes })(Main));
 
 

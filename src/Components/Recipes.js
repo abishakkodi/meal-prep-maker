@@ -5,13 +5,18 @@ import LoadingBar from './LoadingBar';
 import Recipe from './Recipe';
 import '../CSS/Recipes.css';
 import store from '../store';
-
+const test = [1,2,3,4];
 
 class Recipes extends Component {
+
   render() {
-    const { stored } = store.getState();
+    const { stored, databaseRecipes } = store.getState();
     const { storedRecipes } = stored;
-    if(stored.storedRecipes.length){
+    console.log(databaseRecipes.recipes.protein.length);
+
+
+
+    if(databaseRecipes.recipes.protein.length){
       return (
         <div className="">
           <h1> Current Recipes </h1>
@@ -24,6 +29,7 @@ class Recipes extends Component {
             })
           }
           </div>
+
         </div>
       );
     } else {
@@ -34,5 +40,11 @@ class Recipes extends Component {
 
   }
 }
+
+// const Recipes = (props) => {
+
+
+// }
+
 
 export default withRouter(connect()(Recipes));

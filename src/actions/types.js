@@ -2,3 +2,4 @@ export const FETCH_RECIPES = 'FETCH_RECIPES';
 
 export const FETCH_INGREDIENTS = 'FETCH_INGREDIENTS';
 
+export const GET_RECIPES = 'GET_RECIPES';
