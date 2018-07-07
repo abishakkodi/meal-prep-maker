@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import NavBar from '../Components/Navbar'
-import Home from '../Components/Home';
-import Recipes from '../Components/Recipes';
-import CreateMealplan from '../Components/CreateMealplan';
-import About from '../Components/About';
-import NoMatch from '../Components/NoMatch'
+import NavBar from '../Components/Utility/Navbar'
+
+import Home from '../Components/HomeView';
+import Recipes from '../Components/RecipesView/Recipes';
+import CreateMealplan from '../Components/CreateMealplanView/CreateMealplan';
+import About from '../Components/AboutView/About';
+import NoMatch from '../Components/Utility/NoMatch';
 
 
 const routes = (

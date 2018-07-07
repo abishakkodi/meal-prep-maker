@@ -7,7 +7,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_RECIPES:
-    console.log('data', action.payload);
       return {
         ...state,
         recipes: action.payload

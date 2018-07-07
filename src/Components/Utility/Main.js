@@ -7,7 +7,7 @@ import axios from 'axios';
 import mockData from '../mockData';
 
 //Actions
-import { setRecipes, getRecipes } from '../actions/FetchActions';
+import { setRecipes, getRecipes } from '.../actions';
 
 class Main extends Component {
 
