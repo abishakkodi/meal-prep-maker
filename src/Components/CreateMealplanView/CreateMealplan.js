@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import LoadingBar from './LoadingBar';
-import '../CSS/CreateMealplan.css'
-import store from '../store';
+import LoadingBar from '../Utility/LoadingBar';
+import './CreateMealplan.css'
+import store from '../storeRoute';
 
 class CreateMealPlan extends Component {
   constructor(props){
@@ -24,7 +24,7 @@ class CreateMealPlan extends Component {
   }
 
   mealRecommendations(){
-    //server side or client? 
+    //server side or client?
   }
 
   render() {

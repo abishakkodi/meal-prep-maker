@@ -9,7 +9,7 @@ const foodURL = Faker.image.food();
 const style = { width: 300, height: '200', 'margin': '2px', 'textAlign': 'left' };
 
 const Recipes = (props) => {
- let info = props.recipeData;
+ const info = props.recipeData;
     return (
       <div className='cardImage'>
        <Popup
