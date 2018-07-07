@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import LoadingBar from '../Utility/LoadingBar';
-import Recipe from './Recipe';
 import RecipesCategory from './RecipesCategory';
 import store from '../storeRoute';
 import './Recipes.css';
-
-const test = [1,2,3,4];
 
 class Recipes extends Component {
 
@@ -21,15 +18,15 @@ class Recipes extends Component {
         <div className="">
           <h1> Current Recipes </h1>
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Proteins'/>
+            <RecipesCategory recipeData={storedRecipes} categoryName='Proteins' actualData={databaseRecipes.recipes.protein}/>
           </div>
 
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Vegetables'/>
+            <RecipesCategory recipeData={storedRecipes} categoryName='Vegetables' actualData={databaseRecipes.recipes.vegetables}/>
           </div>
 
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Carbs'/>
+            <RecipesCategory recipeData={storedRecipes} categoryName='Carbs' actualData={databaseRecipes.recipes.carbs}/>
           </div>
 
 
