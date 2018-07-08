@@ -8,9 +8,9 @@ const foodURL = Faker.image.food();
 
 const style = { width: 300, height: '200', 'margin': '2px', 'textAlign': 'left' };
 
-const difficulty =  (code) => {
+// const difficulty =  (code) => {
 
-};
+// };
 
 const mealType = (code) => {
   switch(code){
@@ -21,6 +21,35 @@ const mealType = (code) => {
   }
 }
 
+const listings = (list, title, key, numbered) =>{
+  if(numbered) {
+     return(<div>
+        <h2>{title}</h2>
+        <ol>
+        {list.map((item,index)=>{
+          return(<li key={index}>
+              {
+                item[key]
+              }
+            </li>)
+        })}
+        </ol>
+      </div>)
+  } else {
+    return(<div>
+        <h2>{title}</h2>
+        <ul>
+        {list.map((item,index)=>{
+          return(<li key={index}>
+              {
+                item[key]
+              }
+            </li>)
+        })}
+        </ul>
+      </div>)}
+}
+
 const Recipes = (props) => {
   const actualData = props.actualData;
     return (
@@ -29,7 +58,7 @@ const Recipes = (props) => {
         trigger={
           <div className="button">
             <Card style={style} hoverable
-             cover={<span> <img src={foodURL} /> </span>} >
+             cover={<span> <img alt='Image'src={foodURL} /> </span>} >
                <Meta title={actualData.recipe.name}/>
                <p>Category: {mealType(actualData.recipe.BLD)} </p>
                <p>Calories:  </p>
@@ -39,8 +68,9 @@ const Recipes = (props) => {
         closeOnDocumentClick
       >
     <div className="recipePopup">
-      <p>Category: {mealType(actualData.recipe.BLD)} </p>
-      <p>Calories:  </p>
+      <p>Ingredients: {mealType(actualData.recipe.BLD)} </p>
+      {listings(actualData.ingredients,'Ingredients','name')}
+      {listings(actualData.instructions,'Instructions','step', true)}
     </div>
   </Popup>
       </div>
