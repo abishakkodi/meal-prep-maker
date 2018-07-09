@@ -1,12 +1,13 @@
 import React from 'react';
 import Popup from "reactjs-popup";
-import Faker from 'faker';
-
+//import Faker from 'faker';
+import Image from './anise.jpg';
 import { Card } from 'antd';
 const { Meta } = Card;
-const foodURL = Faker.image.food();
+//const foodURL = Faker.image.food();
 
 const style = { width: 300, height: '200', 'margin': '2px', 'textAlign': 'left' };
+const orderedListStyle = {'textAlign': 'center'};
 
 // const difficulty =  (code) => {
 
@@ -21,11 +22,11 @@ const mealType = (code) => {
   }
 }
 
-const listings = (list, title, key, numbered) =>{
+const listings = (list, title, key, numbered, style='') =>{
   if(numbered) {
      return(<div>
         <h2>{title}</h2>
-        <ol>
+        <ol className={style}>
         {list.map((item,index)=>{
           return(<li key={index}>
               {
@@ -38,7 +39,7 @@ const listings = (list, title, key, numbered) =>{
   } else {
     return(<div>
         <h2>{title}</h2>
-        <ul>
+        <ul className={style}>
         {list.map((item,index)=>{
           return(<li key={index}>
               {
@@ -58,7 +59,7 @@ const Recipes = (props) => {
         trigger={
           <div className="button">
             <Card style={style} hoverable
-             cover={<span> <img alt='Image'src={foodURL} /> </span>} >
+             cover={<span> <img alt="Food Image" src={Image} /> </span>} >
                <Meta title={actualData.recipe.name}/>
                <p>Category: {mealType(actualData.recipe.BLD)} </p>
                <p>Calories:  </p>
@@ -69,7 +70,7 @@ const Recipes = (props) => {
       >
     <div className="recipePopup">
       <p>Ingredients: {mealType(actualData.recipe.BLD)} </p>
-      {listings(actualData.ingredients,'Ingredients','name')}
+      {listings(actualData.ingredients,'Ingredients','name',null,orderedListStyle)}
       {listings(actualData.instructions,'Instructions','step', true)}
     </div>
   </Popup>

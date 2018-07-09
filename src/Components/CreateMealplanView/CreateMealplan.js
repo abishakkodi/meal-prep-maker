@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
+import store from '../storeRoute';
+import LoadingBar from '../Utility/LoadingBar';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import LoadingBar from '../Utility/LoadingBar';
-import './CreateMealplan.css'
-import store from '../storeRoute';
+import './CreateMealplan.css';
+
+
+const getIngredients = (databaseRecipes) => {
+  let ingredientsArray = [];
+  filterIngredients(databaseRecipes.protein, ingredientsArray);
+  filterIngredients(databaseRecipes.carbs, ingredientsArray);
+  filterIngredients(databaseRecipes.vegetables, ingredientsArray);
+
+  return _.uniq(ingredientsArray);
+}
+
+const filterIngredients = (recipeType, ingredientsArray) => {
+  if(recipeType.length){
+    recipeType.forEach(recipe =>{
+      recipe.ingredients.forEach(ingredient=>{
+        ingredientsArray.push(ingredient.name);
+      });
+    });
+  }
+}
 
 class CreateMealPlan extends Component {
   constructor(props){
@@ -19,18 +40,19 @@ class CreateMealPlan extends Component {
       }
     }
   }
-  componentDidMount() {
-
-  }
 
   mealRecommendations(){
     //server side or client?
+    //client bc it is already stored on the client side
+
   }
 
   render() {
-    const { stored } = store.getState();
-    console.log("DATA FROM STORE", stored);
+    const { stored, databaseRecipes } = store.getState();
+    console.log("DATA FROM STORE",  databaseRecipes);
+
     if(stored.storedRecipes.length){
+      const ingredients = getIngredients(databaseRecipes.recipes);
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
