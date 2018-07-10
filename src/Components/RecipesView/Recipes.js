@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import LoadingBar from '../Utility/LoadingBar';
 import RecipesCategory from './RecipesCategory';
-import store from '../storeRoute';
+import store from '../fileRouter';
 import './Recipes.css';
 
 class Recipes extends Component {

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import store from '../storeRoute';
+import store from '../fileRouter';
 import LoadingBar from '../Utility/LoadingBar';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
 
+const removeIngredient = data =>({type: 'REMOVE_INGREDIENT', payload: data});
+const addIngredient = data =>({type: 'ADD_INGREDIENT', payload: data});
+const initializeIngredients = data =>({type: 'INITIALIZE_INGREDIENTS', payload: data});
 
 const getIngredients = (databaseRecipes) => {
   let ingredientsArray = [];
@@ -27,40 +30,71 @@ const filterIngredients = (recipeType, ingredientsArray) => {
 }
 
 class CreateMealPlan extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      plan: [],
-      preferences: {},
-      calorieBounds: 2000,
-      mealSchedule: {
-        breakfast: [],
-        lunch: [],
-        dinner: []
-      }
+
+  componentDidMount() {
+
+  }
+
+  handleInitializeArray(ingredients){
+    ingredients.forEach((ingredient)=>{
+      this.props.removeIngredient(ingredient);
+    });
+
+  }
+
+  getIngredients(databaseRecipes){
+    let ingredientsArray = [];
+    this.filterIngredients(databaseRecipes.protein, ingredientsArray);
+    this.filterIngredients(databaseRecipes.carbs, ingredientsArray);
+    this.filterIngredients(databaseRecipes.vegetables, ingredientsArray);
+    return _.uniq(ingredientsArray);
+    }
+
+ filterIngredients(recipeType, ingredientsArray){
+    if(recipeType.length){
+      recipeType.forEach(recipe =>{
+        recipe.ingredients.forEach(ingredient=>{
+          ingredientsArray.push(ingredient.name);
+        });
+      });
     }
   }
 
   mealRecommendations(){
     //server side or client?
     //client bc it is already stored on the client side
+  }
 
+  handleAdd(item){
+    this.props.addIngredient(item);
+  }
+
+  handleRemove(item){
+    this.props.removeIngredient(item);
   }
 
   render() {
     const { stored, databaseRecipes } = store.getState();
-    console.log("DATA FROM STORE",  databaseRecipes);
+    console.log(this.props);
+    const allRecipeIngredients = getIngredients(databaseRecipes.recipes);
 
-    if(stored.storedRecipes.length){
-      const ingredients = getIngredients(databaseRecipes.recipes);
+    if(this.props.recipes.protein.length){
+      const ingredients = getIngredients(this.props.recipes);
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
               <h1> Selected Preferences </h1>
             <div className='preferencesContainer'>
-              <div className='preferencesItem'>
-                <p>Non Vegetarian</p>
-              </div>
+              {
+                this.props.activeIngredients.map((active,index)=>{
+                  return(
+                       <div key={index} className='preferencesItem' onClick={this.handleRemove.bind(this,active)}>
+                        <p>{active}</p>
+                       </div>
+                    )
+                })
+              }
+
 
               <div className='preferencesItem'>
                 <p>Chicken </p>
@@ -71,20 +105,32 @@ class CreateMealPlan extends Component {
 
             </div>
 
-            <div className="mealPlanContainer">
-                <h3> Dynamic checkboxes based ingredients in recipes</h3>
+                <h3> Dynamic click based ingredients in recipes</h3>
+                <div>
+              <div className='preferencesContainer'>
+
+                  {
+                    this.props.ingredientsList.map((ingredient, index)=>{
+                      return (
+                       <div key={index} className='preferencesItem' onClick={this.handleAdd.bind(this,ingredient)}>
+                          <p>{ingredient}</p>
+                       </div>
+                    )
+                    })
+                  }
+                  </div>
+                </div>
+
                 <h4> Some button to create recipe schedule </h4>
-
                 <h2> X day columns </h2>
-                <div className='daysContainer'>
 
+                <div className='daysContainer'>
                   <div className='days'><h4> Dynamic content here </h4></div>
                   <div className='days'><h4> Dynamic content here </h4></div>
                   <div className='days'><h4> Dynamic content here </h4></div>
                   <div className='days'><h4> Dynamic content here </h4></div>
                   <div className='days'><h4> Dynamic content here </h4></div>
                 </div>
-            </div>
           </div>
         );
     }
@@ -97,7 +143,16 @@ class CreateMealPlan extends Component {
   }
 }
 
-export default withRouter(connect()(CreateMealPlan));
+const mapStateToProps = state => {
+  return({
+    activeIngredients: state.ingredients.activeIngredients,
+    ingredientsList: state.ingredients.ingredientsList,
+    databaseRecipes: state.databaseRecipes,
+    recipes: state.databaseRecipes.recipes
+  })
+}
+
+export default withRouter(connect(mapStateToProps, {addIngredient, removeIngredient })(CreateMealPlan));
 
 
 // original filter based on calories and vegetarianism
