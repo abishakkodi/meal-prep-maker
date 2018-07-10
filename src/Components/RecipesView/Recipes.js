@@ -9,24 +9,20 @@ import './Recipes.css';
 class Recipes extends Component {
 
   render() {
-    const { stored, databaseRecipes } = store.getState();
-    const { storedRecipes } = stored;
-    console.log(databaseRecipes.recipes.protein.length);
-
-    if(databaseRecipes.recipes.protein.length){
+    if(this.props.recipes.protein.length){
       return (
         <div className="">
           <h1> Current Recipes </h1>
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Proteins' actualData={databaseRecipes.recipes.protein}/>
+            <RecipesCategory categoryName='Proteins' recipeList={this.props.recipes.protein}/>
           </div>
 
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Vegetables' actualData={databaseRecipes.recipes.vegetables}/>
+            <RecipesCategory categoryName='Vegetables' recipeList={this.props.recipes.vegetables}/>
           </div>
 
           <div>
-            <RecipesCategory recipeData={storedRecipes} categoryName='Carbs' actualData={databaseRecipes.recipes.carbs}/>
+            <RecipesCategory categoryName='Carbs' recipeList={this.props.recipes.carbs}/>
           </div>
 
 
@@ -41,7 +37,13 @@ class Recipes extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return ({
+    databaseRecipes: state.databaseRecipes,
+    recipes: state.databaseRecipes.recipes
+  })
+}
 
 
 
-export default withRouter(connect()(Recipes));
+export default withRouter(connect(mapStateToProps)(Recipes));

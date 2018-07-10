@@ -8,11 +8,11 @@ const RecipesCategory = (props) => {
         <h3>{props.categoryName}</h3>
           <div className="recipesContainer">
           {
-            props.actualData.map((actualData,id)=>{
+            props.recipeList.map((recipeData,id)=>{
               return(
                 <div key={id} className="recipeCard">
                   <Recipe
-                  actualData={actualData}/>
+                  recipeData={recipeData}/>
                 </div>
                 )
             })

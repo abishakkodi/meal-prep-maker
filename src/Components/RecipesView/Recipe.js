@@ -51,8 +51,8 @@ const listings = (list, title, key, numbered, style='') =>{
       </div>)}
 }
 
-const Recipes = (props) => {
-  const actualData = props.actualData;
+const Recipe = (props) => {
+  const {recipeData} = props;
     return (
       <div className='cardImage'>
        <Popup
@@ -60,8 +60,8 @@ const Recipes = (props) => {
           <div className="button">
             <Card style={style} hoverable
              cover={<span> <img alt="Food Image" src={Image} /> </span>} >
-               <Meta title={actualData.recipe.name}/>
-               <p>Category: {mealType(actualData.recipe.BLD)} </p>
+               <Meta title={recipeData.recipe.name}/>
+               <p>Category: {mealType(recipeData.recipe.BLD)} </p>
                <p>Calories:  </p>
             </Card>
           </div>}
@@ -69,9 +69,9 @@ const Recipes = (props) => {
         closeOnDocumentClick
       >
     <div className="recipePopup">
-      <p>Ingredients: {mealType(actualData.recipe.BLD)} </p>
-      {listings(actualData.ingredients,'Ingredients','name',null,orderedListStyle)}
-      {listings(actualData.instructions,'Instructions','step', true)}
+      <p>Ingredients: {mealType(recipeData.recipe.BLD)} </p>
+      {listings(recipeData.ingredients,'Ingredients','name',null,orderedListStyle)}
+      {listings(recipeData.instructions,'Instructions','step', true)}
     </div>
   </Popup>
       </div>
@@ -79,4 +79,4 @@ const Recipes = (props) => {
 }
 
 
-export default Recipes;
+export default Recipe;

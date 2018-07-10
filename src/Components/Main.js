@@ -9,12 +9,10 @@ import mockData from '../mockData';
 
 
 //Actions
-import { setRecipes, getRecipes } from '../actions';
-export const initializeIngredients = data =>({type: 'INITIALIZE_INGREDIENTS', payload: data});
+import { setRecipes, getRecipes, initializeIngredients } from 'actions/';
 
 
 class Main extends Component {
-
   getIngredients(databaseRecipes){
     let ingredientsArray = [];
     this.filterIngredients(databaseRecipes.protein, ingredientsArray);

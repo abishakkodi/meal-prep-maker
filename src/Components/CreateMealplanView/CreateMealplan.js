@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
-import store from '../fileRouter';
 import LoadingBar from '../Utility/LoadingBar';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
+import { removeIngredient, addIngredient,  } from 'actions/';
 
-const removeIngredient = data =>({type: 'REMOVE_INGREDIENT', payload: data});
-const addIngredient = data =>({type: 'ADD_INGREDIENT', payload: data});
-const initializeIngredients = data =>({type: 'INITIALIZE_INGREDIENTS', payload: data});
-
-const getIngredients = (databaseRecipes) => {
-  let ingredientsArray = [];
-  filterIngredients(databaseRecipes.protein, ingredientsArray);
-  filterIngredients(databaseRecipes.carbs, ingredientsArray);
-  filterIngredients(databaseRecipes.vegetables, ingredientsArray);
-
-  return _.uniq(ingredientsArray);
-}
-
-const filterIngredients = (recipeType, ingredientsArray) => {
-  if(recipeType.length){
-    recipeType.forEach(recipe =>{
-      recipe.ingredients.forEach(ingredient=>{
-        ingredientsArray.push(ingredient.name);
-      });
-    });
-  }
-}
 
 class CreateMealPlan extends Component {
 
@@ -42,27 +20,8 @@ class CreateMealPlan extends Component {
 
   }
 
-  getIngredients(databaseRecipes){
-    let ingredientsArray = [];
-    this.filterIngredients(databaseRecipes.protein, ingredientsArray);
-    this.filterIngredients(databaseRecipes.carbs, ingredientsArray);
-    this.filterIngredients(databaseRecipes.vegetables, ingredientsArray);
-    return _.uniq(ingredientsArray);
-    }
-
- filterIngredients(recipeType, ingredientsArray){
-    if(recipeType.length){
-      recipeType.forEach(recipe =>{
-        recipe.ingredients.forEach(ingredient=>{
-          ingredientsArray.push(ingredient.name);
-        });
-      });
-    }
-  }
-
   mealRecommendations(){
-    //server side or client?
-    //client bc it is already stored on the client side
+    //use active ingredients
   }
 
   handleAdd(item){
@@ -74,12 +33,8 @@ class CreateMealPlan extends Component {
   }
 
   render() {
-    const { stored, databaseRecipes } = store.getState();
-    console.log(this.props);
-    const allRecipeIngredients = getIngredients(databaseRecipes.recipes);
 
     if(this.props.recipes.protein.length){
-      const ingredients = getIngredients(this.props.recipes);
        return (
           <div className="CreateMealPlan">
             <h1> CreateMealPlan </h1>
