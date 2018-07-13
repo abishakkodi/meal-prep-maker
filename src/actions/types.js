@@ -10,4 +10,11 @@ export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 
 export const INITIALIZE_INGREDIENTS = 'INITIALIZE_INGREDIENTS';
 
+export const ADD_TAG = 'ADD_TAG';
+
+export const REMOVE_TAG = 'REMOVE_TAG';
+
+export const SET_MEALPLAN = 'SET_MEALPLAN';
+
+
 

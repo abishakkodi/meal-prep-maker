@@ -1,5 +1,5 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, INITIALIZE_INGREDIENTS
- } from '../actions/types';
+ } from 'actions/types';
 
 const initialState = {
     activeIngredients: ['testActiveIngredient'],
