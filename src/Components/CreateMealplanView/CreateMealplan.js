@@ -4,32 +4,30 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
-import { removeIngredient, addIngredient,  } from 'actions/';
+import { removeIngredient, addIngredient, addTag, removeTag  } from 'actions/';
 
 
 class CreateMealPlan extends Component {
 
-  componentDidMount() {
-
-  }
-
-  handleInitializeArray(ingredients){
-    ingredients.forEach((ingredient)=>{
-      this.props.removeIngredient(ingredient);
-    });
-
-  }
-
   mealRecommendations(){
+    console.log('firing meal Recommendations!');
     //use active ingredients
   }
 
-  handleAdd(item){
+  handleAddIngredient(item){
     this.props.addIngredient(item);
   }
 
-  handleRemove(item){
+  handleRemoveIngredient(item){
     this.props.removeIngredient(item);
+  }
+
+  handleAddTag(item){
+    this.props.addTag(item);
+  }
+
+  handleRemoveTag(item){
+    this.props.removeTag(item);
   }
 
   render() {
@@ -37,43 +35,63 @@ class CreateMealPlan extends Component {
     if(this.props.recipes.protein.length){
        return (
           <div className="CreateMealPlan">
-            <h1> CreateMealPlan </h1>
-              <h1> Selected Preferences </h1>
+          <div onClick={this.mealRecommendations.bind(this)}>
+            <h1> Click me to CreateMealPlan! </h1>
+            </div>
+              <h1> Mealplan Preferences </h1>
             <div className='preferencesContainer'>
               {
                 this.props.activeIngredients.map((active,index)=>{
                   return(
-                       <div key={index} className='preferencesItem' onClick={this.handleRemove.bind(this,active)}>
+                       <div key={index} className='preferencesItem' onClick={this.handleRemoveIngredient.bind(this,active)}>
                         <p>{active}</p>
                        </div>
                     )
                 })
               }
+              {
+                this.props.activeTags.map((tag, index)=>{
+                  return(
+                      <div key={index} className='preferencesItem' onClick={this.handleRemoveTag.bind(this,tag)}>
+                          <p>{tag}</p>
+                      </div>)
+                })
 
-
-              <div className='preferencesItem'>
-                <p>Chicken </p>
-              </div>
-              <div className='preferencesItem'>
-                <p> Eggs </p>
-              </div>
+              }
 
             </div>
 
-                <h3> Dynamic click based ingredients in recipes</h3>
+                <h3> Select Ingredients you Have at Home </h3>
                 <div>
-              <div className='preferencesContainer'>
+                  <div className='preferencesContainer'>
 
                   {
                     this.props.ingredientsList.map((ingredient, index)=>{
                       return (
-                       <div key={index} className='preferencesItem' onClick={this.handleAdd.bind(this,ingredient)}>
+                       <div key={index} className='preferencesItem' onClick={this.handleAddIngredient.bind(this,ingredient)}>
                           <p>{ingredient}</p>
                        </div>
                     )
                     })
                   }
                   </div>
+
+
+                  <h3> Select some characteristics you would like your recipes to have! </h3>
+                  <div className='preferencesContainer'>
+
+                  {
+                    this.props.tagsList.map((tag, index)=>{
+                      return (
+                       <div key={index} className='preferencesItem' onClick={this.handleAddTag.bind(this, tag)}>
+                          <p>{tag}</p>
+                       </div>
+                    )
+                    })
+                  }
+                  </div>
+
+
                 </div>
 
                 <h4> Some button to create recipe schedule </h4>
@@ -103,11 +121,15 @@ const mapStateToProps = state => {
     activeIngredients: state.ingredients.activeIngredients,
     ingredientsList: state.ingredients.ingredientsList,
     databaseRecipes: state.databaseRecipes,
-    recipes: state.databaseRecipes.recipes
+    recipes: state.databaseRecipes.recipes,
+    activeTags: state.tags.activeTags,
+    tagsList: state.tags.tagList
   })
 }
 
-export default withRouter(connect(mapStateToProps, {addIngredient, removeIngredient })(CreateMealPlan));
+const mapDispatchToProps = () =>({addIngredient, removeIngredient, addTag, removeTag});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps())(CreateMealPlan));
 
 
 // original filter based on calories and vegetarianism

@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from "reactjs-popup";
 //import Faker from 'faker';
-import Image from './anise.jpg';
+import Image from 'images/anise.jpg';
 import { Card } from 'antd';
 const { Meta } = Card;
 //const foodURL = Faker.image.food();
