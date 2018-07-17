@@ -162,7 +162,7 @@ Connnection.sync({ force: true })
     .then(() => {
         _.times(3, () => {
             return ProteinRecipe.create({
-                    name: `PROTEIN_RECIPE_FROM: ${Faker.name.firstName()}`,
+                    name: `P: ${Faker.name.firstName()}`,
                     vegetarian: Faker.random.boolean(),
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
@@ -171,7 +171,7 @@ Connnection.sync({ force: true })
                 .then((recipe) => {
                     _.times(3, () => {
                         return recipe.createIngredient({
-                            name: `PROTEIN_RECIPE_INGREDIENT_FROM :${recipe.name}`,
+                            name: `P_I:${recipe.name}`,
                             vegetarian: Faker.random.boolean(),
                             staple: Faker.random.boolean()
                         });
@@ -189,7 +189,7 @@ Connnection.sync({ force: true })
     .then(() => {
         _.times(3, () => {
             return CarbRecipe.create({
-                    name: `CARB: ${Faker.name.firstName()}`,
+                    name: `C:${Faker.name.firstName()}`,
                     vegetarian: Faker.random.boolean(),
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
@@ -199,7 +199,7 @@ Connnection.sync({ force: true })
                 .then((recipe) => {
                     _.times(3, () => {
                         return recipe.createIngredient({
-                            name: `INGREDIENT FROM :${recipe.name}`,
+                            name: `IF:${recipe.name}`,
                             vegetarian: Faker.random.boolean(),
                             staple: Faker.random.boolean()
                         });
@@ -219,7 +219,7 @@ Connnection.sync({ force: true })
     .then(() => {
         _.times(3, () => {
             return VegetableRecipe.create({
-                    name: `VEGETABLE: ${Faker.name.firstName()}`,
+                    name: `V:${Faker.name.firstName()}`,
                     vegetarian: true,
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
@@ -229,7 +229,7 @@ Connnection.sync({ force: true })
                 .then((recipe) => {
                     _.times(3, () => {
                          recipe.createIngredient({
-                            name: `INGREDIENT FROM :${recipe.name}`,
+                            name: `IF:${recipe.name}`,
                             vegetarian: true,
                             staple: Faker.random.boolean()
                         });

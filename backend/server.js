@@ -5,12 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { connectionInfo } = require('../config.js');
 const postgresDB = require('./postgresDB.js');
-const seedRecipes = require('./initDatabase.js');
 const readWithPreferences = require('./helpers/readWithPreferences');
 const fillRecipesPage = require('./helpers/fillRecipesPage');
-
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
