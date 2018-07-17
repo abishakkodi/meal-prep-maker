@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
-import { removeIngredient, addIngredient, addTag, removeTag  } from 'actions/';
+import { removeIngredient, addIngredient, addTag, removeTag, setMealplan  } from 'actions/';
 
 
 class CreateMealPlan extends Component {
@@ -30,13 +30,17 @@ class CreateMealPlan extends Component {
     this.props.removeTag(item);
   }
 
+  handleSetMealPlan(){
+    this.props.setMealplan();
+  }
+
   render() {
 
     if(this.props.recipes.protein.length){
        return (
           <div className="CreateMealPlan">
           <div onClick={this.mealRecommendations.bind(this)}>
-            <h1> Click me to CreateMealPlan! </h1>
+            <h1> Hi valerie! </h1>
             </div>
               <h1> Mealplan Preferences </h1>
             <div className='preferencesContainer'>
@@ -127,7 +131,7 @@ const mapStateToProps = state => {
   })
 }
 
-const mapDispatchToProps = () =>({addIngredient, removeIngredient, addTag, removeTag});
+const mapDispatchToProps = () =>({addIngredient, removeIngredient, addTag, removeTag, setMealplan});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps())(CreateMealPlan));
 
