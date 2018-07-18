@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import LoadingBar from '../Utility/LoadingBar';
 import _ from 'lodash';
+import mealRecommendation from './mealRecommendation';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
 import { removeIngredient, addIngredient, addTag, removeTag, setMealplan  } from 'actions/';
 
+const testPreferences = { vegetarian: true };
 
 class CreateMealPlan extends Component {
 
   mealRecommendations(){
     console.log('firing meal Recommendations!');
+    let recommendation =mealRecommendation(testPreferences,this.props.databaseRecipes.recipes);
+    console.log(recommendation);
     //use active ingredients
   }
 
@@ -40,7 +44,7 @@ class CreateMealPlan extends Component {
        return (
           <div className="CreateMealPlan">
           <div onClick={this.mealRecommendations.bind(this)}>
-            <h1> Hi valerie! </h1>
+            <h1> Click me to CreateMealPlan! </h1>
             </div>
               <h1> Mealplan Preferences </h1>
             <div className='preferencesContainer'>

@@ -1,8 +1,16 @@
-const mealRecommendations = (preferencesObj, recipesObj) => {
-  let recommendations = [];
+const mealRecommendation = (preferencesObj, recipesObj) => {
 
+    let recommendations;
 
+  if(preferencesObj.vegetarian){
+    console.log('IN VEG PREFERENCES');
 
+    recommendations = filtered(recipesObj, vegetarianFilter);
+    }
+
+  if(!recommendations){
+    return recipesObj;
+  }
 
   return recommendations;
 }
@@ -11,29 +19,30 @@ const mealRecommendations = (preferencesObj, recipesObj) => {
 
 //
 
-export default mealRecommendations;
 
-const filterFunction = ( recipesObj, someTest ) => {
+const filtered = ( recipesObj, filterFunc ) => {
   let filteredRecipes = { protein: [], vegetables: [], carbs: [] };
   filteredRecipes.protein = recipesObj.protein.filter((recipe =>{
-    return someTest(recipe);
+    return filterFunc(recipe);
   }));
   filteredRecipes.vegetables = recipesObj.vegetables.filter((recipe =>{
-    return someTest(recipe);
+    return filterFunc(recipe);
   }));
   filteredRecipes.carbs = recipesObj.carbs.filter((recipe =>{
-    return someTest(recipe);
+    return filterFunc(recipe);
   }));
 
   return filteredRecipes;
 }
 
-/*
-{
-  protein
-  vegetarian
-  carb
+
+const vegetarianFilter = (recipeObject) => {
+  if(recipeObject.recipe.vegetarian) {
+    console.log('recipesObj:', recipeObject.recipe)
+    return true;
+  } else {
+    return false
+  }
 }
 
-
-*/
+module.exports = mealRecommendation;
