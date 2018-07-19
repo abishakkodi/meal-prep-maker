@@ -1,10 +1,8 @@
 const mealRecommendation = (preferencesObj, recipesObj) => {
 
-    let recommendations;
+  let recommendations;
 
   if(preferencesObj.vegetarian){
-    console.log('IN VEG PREFERENCES');
-
     recommendations = filtered(recipesObj, vegetarianFilter);
     }
 
@@ -38,7 +36,6 @@ const filtered = ( recipesObj, filterFunc ) => {
 
 const vegetarianFilter = (recipeObject) => {
   if(recipeObject.recipe.vegetarian) {
-    console.log('recipesObj:', recipeObject.recipe)
     return true;
   } else {
     return false

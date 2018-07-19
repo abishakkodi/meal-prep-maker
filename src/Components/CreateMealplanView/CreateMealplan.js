@@ -12,9 +12,9 @@ const testPreferences = { vegetarian: true };
 class CreateMealPlan extends Component {
 
   mealRecommendations(){
-    console.log('firing meal Recommendations!');
-    let recommendation =mealRecommendation(testPreferences,this.props.databaseRecipes.recipes);
+    let recommendation = mealRecommendation(testPreferences,this.props.databaseRecipes.recipes);
     console.log(recommendation);
+    this.props.setMealplan(recommendation);
     //use active ingredients
   }
 
@@ -112,6 +112,13 @@ class CreateMealPlan extends Component {
                   <div className='days'><h4> Dynamic content here </h4></div>
                   <div className='days'><h4> Dynamic content here </h4></div>
                 </div>
+                <div className='daysContainer'>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                  <div className='days'><h4> Dynamic content here </h4></div>
+                </div>
           </div>
         );
     }
@@ -131,7 +138,8 @@ const mapStateToProps = state => {
     databaseRecipes: state.databaseRecipes,
     recipes: state.databaseRecipes.recipes,
     activeTags: state.tags.activeTags,
-    tagsList: state.tags.tagList
+    tagsList: state.tags.tagList,
+    mealplan: state.mealplan.mealplan
   })
 }
 

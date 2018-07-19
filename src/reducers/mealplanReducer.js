@@ -1,4 +1,4 @@
-import { SET_MEALPLAN } from 'action/types';
+import { SET_MEALPLAN } from 'actions/types';
 
 const initalState = {mealplan: []};
 
