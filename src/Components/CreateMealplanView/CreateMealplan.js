@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoadingBar from '../Utility/LoadingBar';
-import _ from 'lodash';
+import CaloriesSlider from './CaloriesSlider';
+//import _ from 'lodash';
 import mealRecommendation from './mealRecommendation';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
@@ -43,9 +44,14 @@ class CreateMealPlan extends Component {
     if(this.props.recipes.protein.length){
        return (
           <div className="CreateMealPlan">
-          <div onClick={this.mealRecommendations.bind(this)}>
-            <h1> Click me to CreateMealPlan! </h1>
+            <div onClick={this.mealRecommendations.bind(this)}>
+              <h1> Click me to CreateMealPlan! </h1>
             </div>
+
+            <div>
+             <CaloriesSlider value={this.props.calories} />
+            </div>
+
               <h1> Mealplan Preferences </h1>
             <div className='preferencesContainer'>
               {
@@ -68,6 +74,7 @@ class CreateMealPlan extends Component {
               }
 
             </div>
+
 
                 <h3> Select Ingredients you Have at Home </h3>
                 <div>

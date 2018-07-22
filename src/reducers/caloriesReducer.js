@@ -1,6 +1,6 @@
 import { SET_CALORIES } from 'actions/types';
 
-const initalState = { calories: 2000 };
+const initalState = { calories: 17 };
 
 export default function(state = initalState, action) {
   switch(action.type) {
