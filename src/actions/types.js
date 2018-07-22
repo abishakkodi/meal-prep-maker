@@ -16,6 +16,6 @@ export const REMOVE_TAG = 'REMOVE_TAG';
 
 export const SET_MEALPLAN = 'SET_MEALPLAN';
 
-
+export const SET_CALORIES = 'SET_CALORIES';
 
 

@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, GET_RECIPES, ADD_INGREDIENT, REMOVE_INGREDIENT, INITIALIZE_INGREDIENTS, ADD_TAG, REMOVE_TAG, SET_MEALPLAN } from './types';
+import { FETCH_RECIPES, GET_RECIPES, ADD_INGREDIENT, REMOVE_INGREDIENT, INITIALIZE_INGREDIENTS, ADD_TAG, REMOVE_TAG, SET_MEALPLAN, SET_CALORIES } from './types';
 
 export const setRecipes = data => ({type: FETCH_RECIPES, payload: data});
 
@@ -15,3 +15,5 @@ export const addTag = data =>({type: ADD_TAG, payload: data});
 export const removeTag = data =>({type: REMOVE_TAG, payload: data});
 
 export const setMealplan = data =>({type: SET_MEALPLAN, payload: data});
+
+export const setCalories = data => ({type: SET_CALORIES, payload: data});

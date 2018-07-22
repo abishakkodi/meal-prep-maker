@@ -5,7 +5,7 @@ import mealRecommendation from './mealRecommendation';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
-import { removeIngredient, addIngredient, addTag, removeTag, setMealplan  } from 'actions/';
+import { removeIngredient, addIngredient, addTag, removeTag, setMealplan, setCalories  } from 'actions/';
 
 const testPreferences = { vegetarian: true };
 
@@ -139,11 +139,12 @@ const mapStateToProps = state => {
     recipes: state.databaseRecipes.recipes,
     activeTags: state.tags.activeTags,
     tagsList: state.tags.tagList,
-    mealplan: state.mealplan.mealplan
+    mealplan: state.mealplan.mealplan,
+    calories: state.calories.calories
   })
 }
 
-const mapDispatchToProps = () =>({addIngredient, removeIngredient, addTag, removeTag, setMealplan});
+const mapDispatchToProps = () =>({addIngredient, removeIngredient, addTag, removeTag, setMealplan, setCalories});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps())(CreateMealPlan));
 
