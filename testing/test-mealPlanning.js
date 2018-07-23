@@ -2,7 +2,7 @@ const chai = require('chai');
 const should = chai.should();
 const assert = require('assert');
 const chaiHttp = require('chai-http');
-const { mealRecommendation, selectDifficultyFilter } = require('../src/Components/CreateMealplanView/mealRecommendation');
+const { mealRecommendation, selectDifficultyFilter, selectIngredientsFilter } = require('../src/Components/CreateMealplanView/mealRecommendation');
 const recipesObj = require('./fakeRes');
 const proteinRecipeObj = recipesObj.protein[0];
 chai.use(chaiHttp);
@@ -64,19 +64,47 @@ describe('Filter Functions', () => {
             filtered.should.equal(true);
         });
 
-         it('Should return a function that returns a filter condition based on easy difficulty preferences', () => {
+        it('Should return a function that returns a filter condition based on easy difficulty preferences', () => {
             const pref = { difficulty: [1] }
             const returnedFunction = selectDifficultyFilter(pref.difficulty);
             const filtered = returnedFunction(proteinRecipeObj);
             filtered.should.equal(false);
         });
 
-         it('Should return a function that returns a filter condition based on multiple difficulty preferences', () => {
-            const pref = { difficulty: [1,2,3] }
+        it('Should return a function that returns a filter condition based on multiple difficulty preferences', () => {
+            const pref = { difficulty: [1, 2, 3] }
             const returnedFunction = selectDifficultyFilter(pref.difficulty);
             const filtered = returnedFunction(proteinRecipeObj);
             filtered.should.equal(true);
         });
+    });
+
+    describe('Ingredients Filter', () => {
+        it('Should return a function', () => {
+            const pref = { ingredients: ['test'] }
+            const returnedFunction = selectIngredientsFilter(pref.ingredients);
+            returnedFunction.should.be.a('function');
+        });
+
+        it('Should return a function that accepts an empty array of ingredients and accepts all ingredients', () => {
+            const pref = { ingredients: [] }
+            const returnedFunction = selectIngredientsFilter(pref.ingredients);
+            const filtered = returnedFunction(proteinRecipeObj);
+            filtered.should.equal(true);
+        });
+        it('Should return a function that returns false if an ingredient is not in the preferences', () => {
+            const pref = { ingredients: ['not ingredient'] }
+            const returnedFunction = selectIngredientsFilter(pref.ingredients);
+            const filtered = returnedFunction(proteinRecipeObj);
+            filtered.should.equal(false);
+        });
+        it('Should return a function that returns true if an ingredient is not in the preferences', () => {
+            const pref = { ingredients: ['P_I:P: Deonte'] }
+            const returnedFunction = selectIngredientsFilter(pref.ingredients);
+            const filtered = returnedFunction(proteinRecipeObj);
+            filtered.should.equal(true);
+        });
+
     })
 });
 
