@@ -11,7 +11,7 @@ const Connnection = new Sequelize(
     }
 );
 
-const difficulty = ['easy', 'medium' ,'hard'];
+const difficulty = [1,2,3];
 const BLD = ['b','l','d'];
 const multiplier = [ 1 , 2, 3, 4];
 
@@ -38,7 +38,7 @@ const ProteinRecipe = Connnection.define('proteinRecipe', {
     },
 
     difficulty: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
     }
 
@@ -67,7 +67,7 @@ const CarbRecipe = Connnection.define('carbRecipe', {
     },
 
     difficulty: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
     }
 
@@ -96,7 +96,7 @@ const VegetableRecipe = Connnection.define('vegetableRecipe', {
     },
 
     difficulty: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
     }
 
