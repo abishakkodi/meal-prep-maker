@@ -46,7 +46,9 @@ const vegetarianFilter = (recipeObject) => {
 }
 
 const selectDifficultyFilter = (preferenceDifficultyArray) => {
-    if (preferenceDifficultyArray.includes(3)) {
+
+
+    if (preferenceDifficultyArray.includes(3) || preferenceDifficultyArray.length === 0) {
         return (recipeObject => {
             return true;
         })

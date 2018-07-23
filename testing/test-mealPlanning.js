@@ -63,6 +63,20 @@ describe('Filter Functions', () => {
             const filtered = returnedFunction(proteinRecipeObj);
             filtered.should.equal(true);
         });
+
+         it('Should return a function that returns a filter condition based on easy difficulty preferences', () => {
+            const pref = { difficulty: [1] }
+            const returnedFunction = selectDifficultyFilter(pref.difficulty);
+            const filtered = returnedFunction(proteinRecipeObj);
+            filtered.should.equal(false);
+        });
+
+         it('Should return a function that returns a filter condition based on multiple difficulty preferences', () => {
+            const pref = { difficulty: [1,2,3] }
+            const returnedFunction = selectDifficultyFilter(pref.difficulty);
+            const filtered = returnedFunction(proteinRecipeObj);
+            filtered.should.equal(true);
+        });
     })
 });
 
@@ -94,7 +108,6 @@ describe('mealRecommendations function', () => {
         it('Should be able to preference specific ingredients from recipes', () => {
             const preferencesObj = { difficulty: [2] };
             let result = mealRecommendation(preferencesObj, recipesObj);
-            console.log(result);
         })
     })
 

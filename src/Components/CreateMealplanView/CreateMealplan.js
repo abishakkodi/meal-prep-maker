@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import './CreateMealplan.css';
 import { removeIngredient, addIngredient, addTag, removeTag, setMealplan, setCalories  } from 'actions/';
 
-const testPreferences = { vegetarian: true };
+const testPreferences = { vegetarian: true, difficulty: [] };
 
 class CreateMealPlan extends Component {
 
