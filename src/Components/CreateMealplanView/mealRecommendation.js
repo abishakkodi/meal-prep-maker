@@ -8,19 +8,16 @@ const mealRecommendation = (preferencesObj, recipesObj) => {
         recommendations = filtered(recommendations, vegetarianFilter);
     }
 
-    if(preferencesObj.difficulty) {
-      const difficultyFilter = selectDifficultyFilter(preferencesObj.difficulty);
-      recommendations = filtered(recommendations, difficultyFilter)
+    if (preferencesObj.difficulty) {
+        const difficultyFilter = selectDifficultyFilter(preferencesObj.difficulty);
+        recommendations = filtered(recommendations, difficultyFilter)
     }
 
     return recommendations;
 }
 
-// if vegetarian filter out all meat recipes and return array of base objects
 
-//
-
-
+//this function filters the recipe object and returns the recipes
 const filtered = (recipesObj, filterFunc) => {
     let filteredRecipes = { protein: [], vegetables: [], carbs: [] };
     filteredRecipes.protein = recipesObj.protein.filter((recipe => {
@@ -46,8 +43,6 @@ const vegetarianFilter = (recipeObject) => {
 }
 
 const selectDifficultyFilter = (preferenceDifficultyArray) => {
-
-
     if (preferenceDifficultyArray.includes(3) || preferenceDifficultyArray.length === 0) {
         return (recipeObject => {
             return true;
@@ -62,14 +57,31 @@ const selectDifficultyFilter = (preferenceDifficultyArray) => {
         })
     } else if (preferenceDifficultyArray[0] === 1) {
         return (recipeObj => {
-          if(recipeObj.recipe.difficulty === 1 ) {
-            return true
-          } else {
-            return false
-          }
+            if (recipeObj.recipe.difficulty === 1) {
+                return true
+            } else {
+                return false
+            }
         })
     }
 }
 
+const selectIngredientsFilter = (ingredientsPreferencesArray) => {
+    return (recipeObj => {
+        if(ingredientsPreferencesArray.length === 0) {
+          return true;
+        }
 
-module.exports = {mealRecommendation,selectDifficultyFilter };
+        const hasIngredient = recipeObj.ingredients.filter(ingredient => ingredientsPreferencesArray.includes(ingredient.name));
+        if (hasIngredient.length) {
+            return true
+        } else {
+            return false
+        }
+    });
+}
+
+
+
+
+module.exports = { mealRecommendation, selectDifficultyFilter, selectIngredientsFilter };
