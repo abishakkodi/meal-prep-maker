@@ -6,44 +6,54 @@ const dailyMealSchedule = (recommendedMeals, calorieRequest, mealsPerDay = 3, nu
     let mealTotals = {};
     let dailyMealsArray = [];
     const maxMealCalories = calorieRequest / mealsPerDay;
-    const proteins = recommendedMeals.protein,
-        carbs = recommendedMeals.carbs,
-        vegetables = recommendedMeals.vegetables;
+    const calsByMacro = caloriesByMacro(maxMealCalories, macros);
 
     for (let i = 0; i < numberOfDays; i++) {
-
-
+      dailyMealsArray.push(dailyMealsObject(recommendedMeals, mealsPerDay, calsByMacro))
     }
-
 
     return dailyMealsArray;
 }
 
-const buildMealObject = (recommendedMeals, mealsPerDay, caloriesByMacro) => {
+const dailyMealsObject = (recommendedMeals, mealsPerDay, caloriesByMacro) => {
     let dailyMeal = {};
     for (let j = 0; j < mealsPerDay; j++) {
-        dailyMeal[j] = {
-
-        };
+        dailyMeal[j] = buildMeal(recommendedMeals, caloriesByMacro);
     }
     return dailyMeal;
 }
 
 const buildMeal = (recommendedMeals, caloriesByMacro) => {
 
+    let protein = _.sample(recommendedMeals.protein);
+    protein.multiplier = parseFloat(caloriesByMacro['p'] * 1.0 / protein.recipe.baseCalories).toFixed(2);
+
+    let carb = _.sample(recommendedMeals.carbs);
+    carb.multiplier = parseFloat(caloriesByMacro['c'] * 1.0 / carb.recipe.baseCalories).toFixed(2);
+    let vegetable = _.sample(recommendedMeals.vegetables);
+    vegetable.multiplier = parseFloat(caloriesByMacro['v'] * 1.0 / vegetable.recipe.baseCalories).toFixed(2);
+
+    return ({ protein, carb, vegetable })
 }
 
 const caloriesByMacro = (maxMealCalories, macros) => ({
     p: macros['p'] * maxMealCalories * 0.01,
     c: macros['c'] * maxMealCalories * 0.01,
     v: macros['v'] * maxMealCalories * 0.01
+})
+
+const ingredientTotals = (totalsObj, ingredient, amount) => {
+  if(ingredient in totalsObj) {
+    totalsObj[ingredient] +=  amount;
+  } else {
+    totalsObj[ingredient] = amount;
   }
-)
 
 
+  return totalsObj;
+}
 
-
-module.exports = { dailyMealSchedule, buildMealObject, buildMeal, caloriesByMacro };
+module.exports = { dailyMealSchedule, dailyMealsObject, buildMeal, caloriesByMacro,ingredientTotals };
 
 
 /*
@@ -51,8 +61,6 @@ macro ratios?
 protein 50%
 vegetables 30%
 carbs 20%
-
-
 
 Have an object array to push ingredients in
 {
@@ -62,6 +70,8 @@ Have an object array to push ingredients in
            multiplier:
   }
 
+
+400 X     250
 
 
 }
