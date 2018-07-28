@@ -35,7 +35,7 @@ class CaloriesSliderView extends Component {
           onChange={this.handleChange}
           onChangeComplete={this.handleChangeComplete}
         />
-        <div className='value'>{this.props.value * 100}</div>
+        <div className='value'>{this.props.value * 100.0}</div>
       </div>
     )
   }

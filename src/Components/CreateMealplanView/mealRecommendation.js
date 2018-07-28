@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 const mealRecommendation = (preferencesObj, recipesObj) => {
 
     let recommendations = recipesObj;
@@ -80,8 +78,6 @@ const selectIngredientsFilter = (ingredientsPreferencesArray) => {
         }
     });
 }
-
-
 
 
 module.exports = { mealRecommendation, selectDifficultyFilter, selectIngredientsFilter };
