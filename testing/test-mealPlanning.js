@@ -5,6 +5,7 @@ const chaiHttp = require('chai-http');
 const { mealRecommendation, selectDifficultyFilter, selectIngredientsFilter } = require('../src/Components/CreateMealplanView/mealRecommendation');
 const recipesObj = require('./fakeRes');
 const proteinRecipeObj = recipesObj.protein[0];
+
 chai.use(chaiHttp);
 
 
@@ -36,6 +37,15 @@ describe('Fake Data should be in the correct shape', () => {
 
 
 describe('Filter Functions', () => {
+      describe('vegetarian filter', () => {
+        it('Should be able to filter all non vegetarian recipes from objects', () => {
+            const preferencesObj = { vegetarian: true };
+            let result = mealRecommendation(preferencesObj, recipesObj);
+            result.protein[0].recipe.vegetarian.should.equal(true);
+        })
+    })
+
+
     describe('Difficulty Filter', () => {
         it('Should return a function', () => {
             const pref = { difficulty: [1, 2, 3] }
@@ -123,14 +133,6 @@ describe('mealRecommendations function', () => {
         result.protein[0].recipe.vegetarian.should.equal(false);
     })
 
-
-    describe('vegetarian filter', () => {
-        it('Should be able to filter all non vegetarian recipes from objects', () => {
-            const preferencesObj = { vegetarian: true };
-            let result = mealRecommendation(preferencesObj, recipesObj);
-            result.protein[0].recipe.vegetarian.should.equal(true);
-        })
-    })
 
     describe('difficulty filter', () => {
         it('Should be able to preference specific ingredients from recipes', () => {

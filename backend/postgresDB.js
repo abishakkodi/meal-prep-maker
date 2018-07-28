@@ -40,6 +40,11 @@ const ProteinRecipe = Connnection.define('proteinRecipe', {
     difficulty: {
         type: Sequelize.INTEGER,
         allowNull: true
+    },
+
+    totalCalories: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 
 });
@@ -67,6 +72,11 @@ const CarbRecipe = Connnection.define('carbRecipe', {
     },
 
     difficulty: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    },
+
+    totalCalories: {
         type: Sequelize.INTEGER,
         allowNull: true
     }
@@ -98,6 +108,11 @@ const VegetableRecipe = Connnection.define('vegetableRecipe', {
     difficulty: {
         type: Sequelize.INTEGER,
         allowNull: true
+    },
+
+    totalCalories: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 
 });
@@ -115,7 +130,18 @@ const Ingredient = Connnection.define('ingredient', {
     staple: {
         type: Sequelize.BOOLEAN,
         allowNull: true
+    },
+
+    amount: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    },
+
+    unit: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
+
 });
 
 const RecipeInstruction = Connnection.define('instruction', {
@@ -243,6 +269,10 @@ Connnection.sync({ force: true })
                     })
                 })
         })
+    })
+    .then(()=>
+    {
+        console.log("FINISHED BUILDING");
     })
     .catch((err) => (console.log('SYNC ERROR', err)));
 
