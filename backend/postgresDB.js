@@ -14,6 +14,8 @@ const Connnection = new Sequelize(
 const difficulty = [1,2,3];
 const BLD = ['b','l','d'];
 const multiplier = [ 1 , 2, 3, 4];
+const baseCalories = [ 200, 250, 300, 350, 400, 450, 500];
+const amounts = [10, 15, 20, 25, 30, 35, 40]
 
 const ProteinRecipe = Connnection.define('proteinRecipe', {
     name: {
@@ -25,7 +27,7 @@ const ProteinRecipe = Connnection.define('proteinRecipe', {
         allowNull: true
     },
     multiplier: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: true
     },
     vegetarian: {
@@ -42,7 +44,7 @@ const ProteinRecipe = Connnection.define('proteinRecipe', {
         allowNull: true
     },
 
-    totalCalories: {
+    baseCalories: {
         type: Sequelize.INTEGER,
         allowNull: true
     }
@@ -59,7 +61,7 @@ const CarbRecipe = Connnection.define('carbRecipe', {
         allowNull: true
     },
     multiplier: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: true
     },
     vegetarian: {
@@ -76,7 +78,7 @@ const CarbRecipe = Connnection.define('carbRecipe', {
         allowNull: true
     },
 
-    totalCalories: {
+    baseCalories: {
         type: Sequelize.INTEGER,
         allowNull: true
     }
@@ -93,7 +95,7 @@ const VegetableRecipe = Connnection.define('vegetableRecipe', {
         allowNull: true
     },
     multiplier: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: true
     },
     vegetarian: {
@@ -110,7 +112,7 @@ const VegetableRecipe = Connnection.define('vegetableRecipe', {
         allowNull: true
     },
 
-    totalCalories: {
+    baseCalories: {
         type: Sequelize.INTEGER,
         allowNull: true
     }
@@ -192,14 +194,16 @@ Connnection.sync({ force: true })
                     vegetarian: Faker.random.boolean(),
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
-                    multiplier: _.sample(multiplier)
+                    multiplier: _.sample(multiplier),
+                    baseCalories: _.sample(baseCalories)
                 })
                 .then((recipe) => {
                     _.times(3, () => {
                         return recipe.createIngredient({
                             name: `P_I:${recipe.name}`,
                             vegetarian: Faker.random.boolean(),
-                            staple: Faker.random.boolean()
+                            staple: Faker.random.boolean(),
+                            amount: _.sample(amounts)
                         });
                     });
                 instructionsArray.forEach((item, index) => {
@@ -219,7 +223,9 @@ Connnection.sync({ force: true })
                     vegetarian: Faker.random.boolean(),
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
-                    multiplier: _.sample(multiplier)
+                    multiplier: _.sample(multiplier),
+                    baseCalories: _.sample(baseCalories)
+
 
                 })
                 .then((recipe) => {
@@ -227,7 +233,8 @@ Connnection.sync({ force: true })
                         return recipe.createIngredient({
                             name: `IF:${recipe.name}`,
                             vegetarian: Faker.random.boolean(),
-                            staple: Faker.random.boolean()
+                            staple: Faker.random.boolean(),
+                            amount: _.sample(amounts)
                         });
 
                     });
@@ -249,7 +256,9 @@ Connnection.sync({ force: true })
                     vegetarian: true,
                     BLD: _.sample(BLD),
                     difficulty: _.sample(difficulty),
-                    multiplier: _.sample(multiplier)
+                    multiplier: _.sample(multiplier),
+                    baseCalories: _.sample(baseCalories)
+
 
                 })
                 .then((recipe) => {
@@ -257,7 +266,8 @@ Connnection.sync({ force: true })
                          recipe.createIngredient({
                             name: `IF:${recipe.name}`,
                             vegetarian: true,
-                            staple: Faker.random.boolean()
+                            staple: Faker.random.boolean(),
+                            amount: _.sample(amounts)
                         });
                     });
                     instructionsArray.forEach((item, index) => {
@@ -277,3 +287,17 @@ Connnection.sync({ force: true })
     .catch((err) => (console.log('SYNC ERROR', err)));
 
 module.exports = Connnection;
+
+
+/*
+
+1000 cals               0.8 -> 400
+    ing1 200            160
+    ing2 100            80
+    ing3 80             64
+    ing4 120            96
+
+
+
+
+*/
