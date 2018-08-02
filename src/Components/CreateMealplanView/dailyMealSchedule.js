@@ -3,7 +3,7 @@ const defaultMacrosPercentages = { p: 50, v: 30, c: 20 };
 const defaultMealsPerDay = 3;
 const defaultNumberOfDays = 4;
 
-const dailyMealSchedule = (recommendedMeals, calorieRequest, mealsPerDay = defaultMealsPerDay, numberOfDays = defaultNumberOfDays, macros = testMacrosPercentages) => {
+const dailyMealSchedule = (recommendedMeals, calorieRequest, mealsPerDay = defaultMealsPerDay, numberOfDays = defaultNumberOfDays, macros = defaultMacrosPercentages) => {
   let ingredientAmountTotals = {};
   let dailyMealsArray = [];
   const maxMealCalories = calorieRequest / mealsPerDay;

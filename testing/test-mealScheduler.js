@@ -7,6 +7,7 @@ const testMaxMealCalories = 500;
 const defaultMealsPerDay = 3;
 const defaultNumberOfDays = 4;
 const testMacrosPercentages = { p: 50, v: 30, c: 20 };
+const calorieRequest = 1800;
 
 
 describe('Calories By Macro Function', () => {
@@ -85,5 +86,11 @@ describe('Daily Meals Object Function', () => {
 })
 
 describe('Build Schedule Object Function', () => {
+
+    const testDailyMealSchedule = dailyMealSchedule(recipesObj,calorieRequest);
+
+    if('Should return an object',()=>{
+      testDailyMealSchedule.should.be.an('object')
+    })
 
 })
