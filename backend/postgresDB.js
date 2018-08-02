@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const _ = require('lodash');
 const Faker = require('faker');
+const config = require('../config');
+
 
 const Connnection = new Sequelize(
     'mealprepdev',
